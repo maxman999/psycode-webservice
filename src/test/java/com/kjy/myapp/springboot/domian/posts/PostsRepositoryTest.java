@@ -48,7 +48,7 @@ public class PostsRepositoryTest {
     }
 
     @Test
-    public void BaseTimeEntity_resist(){
+    public void BaseTimeEntity_register(){
         //given
         LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
         postsRepository.save(Posts.builder()
