@@ -40,6 +40,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-jdbc'
     //spring-security-test
     testImplementation 'org.springframework.security:spring-security-test'
+    //MariaDB Driver
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
 }
 
 test {
