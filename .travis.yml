@@ -38,7 +38,6 @@ deploy:
     application: psycode-webservice
     deployment_group: psycode-webservice-group
     region: ap-northeast-2
-    edge: true
 
 # CI 실행 완료 시 메일로 알람
 notifications:
