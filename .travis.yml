@@ -29,6 +29,16 @@ deploy:
     local_dir: deploy # before_deploy에서 생성한 디렉토리
     edge: true
 
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: psycode-build
+    key: psycode-webservice.zip
+    bundle_type: zip
+    application: psycode-webservice
+    deployment_group: psycode-webservice-group
+    region: ap-northeast-2
+    edge: true
 
 # CI 실행 완료 시 메일로 알람
 notifications:
