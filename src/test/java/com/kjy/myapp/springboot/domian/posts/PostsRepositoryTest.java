@@ -12,15 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
@@ -30,10 +27,10 @@ public class PostsRepositoryTest {
     @Autowired
     PostsRepository postsRepository;
 
-//    @After
-//    public void cleanup() {
-//        postsRepository.deleteAll();
-//    }
+    @After
+    public void cleanup() {
+        postsRepository.deleteAll();
+    }
 
     @Test
     public void testInsertAndSelect() {

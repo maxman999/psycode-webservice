@@ -54,13 +54,4 @@ public class UserRepositoryTest {
             System.out.println(id + " : "+ user.toString());
         }
     }
-
-    @Transactional
-    @Test
-    public void testSelect2(){
-        Long id = 100L;
-        User user = userRepository.getOne(id);
-        System.out.println("=============================");
-        System.out.println(user);
-    }
 }
