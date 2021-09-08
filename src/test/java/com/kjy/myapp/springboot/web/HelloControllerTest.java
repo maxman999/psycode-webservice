@@ -25,16 +25,6 @@ public class HelloControllerTest {
 
     @WithMockUser(roles = "USER")
     @Test
-    public void helloReturn() throws Exception{
-        String hello = "hello";
-
-        mvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(hello));
-    }
-
-    @WithMockUser(roles = "USER")
-    @Test
     public void helloDtoReturn() throws Exception{
         String name = "hello";
         int amount = 1000;
