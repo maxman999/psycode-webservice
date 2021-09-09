@@ -2,15 +2,16 @@ package com.kjy.myapp.springboot.service.posts;
 
 import com.kjy.myapp.springboot.domain.posts.Posts;
 import com.kjy.myapp.springboot.domain.posts.PostsRepository;
-import com.kjy.myapp.springboot.web.dto.PostsListResponseDto;
-import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
-import com.kjy.myapp.springboot.web.dto.PostsSaveRequestDto;
-import com.kjy.myapp.springboot.web.dto.PostsUpdateRequestDto;
+import com.kjy.myapp.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -43,6 +44,14 @@ public class PostsService {
         return postsRepository.findAllDESC().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public PageResultDto<PostsListResponseDto, Posts> getListWithPaging(PageRequestDto requestDTO){
+        Pageable pageable = requestDTO.getPageable(Sort.by("id").descending());
+        Page<Posts> result = postsRepository.findAll(pageable);
+        Function<Posts, PostsListResponseDto> fn = (posts -> new PostsListResponseDto(posts));
+        return new PageResultDto<>(result, fn);
     }
 
     @Transactional()

@@ -29,10 +29,10 @@ public class PostsRepositoryTest {
     @Autowired
     PostsRepository postsRepository;
 
-    @After
-    public void cleanup() {
-        postsRepository.deleteAll();
-    }
+//    @After
+//    public void cleanup() {
+//        postsRepository.deleteAll();
+//    }
 
     @Test
     public void testInsertAndSelect() {
@@ -116,7 +116,7 @@ public class PostsRepositoryTest {
     public void testInsertDummies() {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Posts posts = Posts.builder()
-                    .author("testAuthor" + i)
+                    .author("kjy")
                     .content("testContent" + i)
                     .title("testTitle" + i)
                     .build();

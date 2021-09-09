@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PsyCode</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr th:each="post : ${result.dtoList}">
+                <td>[[${post.id}]]</td>
+                <td><a th:href="@{posts/update/{id}(id=${post.id})}"> [[${post.title}]] </a></td>
+                <td>[[${post.author}]]</td>
+                <td>[[${post.modifiedDate}]]</td>
+            </tr>
+        </tbody>
+    </table>
+    <!--pagination-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:if="${result.prev}">
+                <a class="page-link" th:href="@{/posts/read(page=${result.start-1})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page:${result.pageList}" >
+                <a class = "page-link" th:href="@{/posts/read(page=${page})}">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:if="${result.next}">
+                <a class="page-link" th:href="@{/posts/read(page=${result.end+1})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--index.js 추가-->
+<script src="/js/app/index.js"></script>
+</body>
+</html>
