@@ -1,6 +1,11 @@
+body {
+padding-top: 10%;
+}
+
 nav {
   height: 10%;
 }
+
 .navbar-brand{
   font-size: xx-large;
 }

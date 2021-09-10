@@ -24,7 +24,7 @@ public class IndexController {
         if(user != null){
             model.addAttribute("userName", user.getName());
         }
-        return "layout/default";
+        return "index";
     }
 
     @GetMapping("posts/read")
@@ -44,10 +44,4 @@ public class IndexController {
         model.addAttribute("post", dto);
         return "view/posts/posts-update";
     }
-
-    @GetMapping("index")
-    public String indexTest(){
-        return "index ";
-    }
-
 }
