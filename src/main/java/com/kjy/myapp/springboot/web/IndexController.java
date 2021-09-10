@@ -24,30 +24,30 @@ public class IndexController {
         if(user != null){
             model.addAttribute("userName", user.getName());
         }
-        return "index";
+        return "layout/default";
     }
 
     @GetMapping("posts/read")
     public String postRead(Model model, PageRequestDto pageRequestDTO){
         model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO));
-        return "posts-read";
+        return "view/posts/posts-read";
     }
 
     @GetMapping("posts/save")
     public String postsSave(){
-        return "posts-save";
+        return "view/posts/posts-save";
     }
 
     @GetMapping("posts/update/{id}")
     public String postUpdate(@PathVariable Long id, Model model){
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
-        return "posts-update";
+        return "view/posts/posts-update";
     }
 
     @GetMapping("index")
     public String indexTest(){
-        return "test";
+        return "index ";
     }
 
 }

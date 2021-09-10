@@ -46,7 +46,7 @@ dependencies {
     //thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
     //querydsl
     implementation 'com.querydsl:querydsl-jpa'
 }
@@ -55,21 +55,19 @@ test {
     useJUnitPlatform()
 }
 
+// querydsl
 def querydslDir = "$buildDir/generated/querydsl"
 
 querydsl {
     jpa = true
     querydslSourcesDir = querydslDir
 }
-
 sourceSets {
     main.java.srcDir querydslDir
 }
-
 configurations {
     querydsl.extendsFrom compileClasspath
 }
-
 compileQuerydsl{
     options.annotationProcessorPath = configurations.querydsl
 }
