@@ -12,8 +12,10 @@
 <body>
 
 <!-- content -->
-<div th:replace="${content}">
-    before
+<div class = "content">
+    <th:block th:replace="${content}">
+        before
+    </th:block>
 </div>
 <!-- /content-->
 
