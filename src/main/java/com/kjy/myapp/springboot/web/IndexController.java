@@ -44,4 +44,8 @@ public class IndexController {
         model.addAttribute("post", dto);
         return "view/posts/posts-update";
     }
+    @GetMapping("basic")
+    public String basic(){
+        return "layout/basic";
+    }
 }

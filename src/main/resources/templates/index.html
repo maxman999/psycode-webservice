@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <th:block th:replace="~{layout/default::setContent(~{this::content})}">
-        <th:block th:fragment="content">
-            <div class = "container">
-                <div class= "row">
-                    Comming Soon !
-                </div>
-            </div>
-        </th:block>
-    </th:block>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic}">
+
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            Comming Soon !
+        </div>
+    </div>
+</th:block>
 </html>
