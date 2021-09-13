@@ -153,39 +153,37 @@ public class PostsRepositoryTest {
         });
     }
 
-    @Test
-    public void testQuerydsl(){
-        Pageable pageable = PageRequest.of(0,10, Sort.by("id").descending());
-        QPosts qPosts = QPosts.posts;
-        String keyword = "1";
-        BooleanBuilder builder = new BooleanBuilder();
-        BooleanExpression expression = qPosts.title.contains(keyword);
-        builder.and(expression);
-        Page<Posts> result = postsRepository.findAll(builder, pageable);
-
-        result.stream().forEach(post -> {
-            System.out.println(post);
-        });
-    }
-
-    @Test
-    public void testQuerydsl2(){
-        Pageable pageable = PageRequest.of(0,10, Sort.by("id").descending());
-        QPosts qPosts = QPosts.posts;
-        String keyword = "1";
-        BooleanBuilder builder = new BooleanBuilder();
-        BooleanExpression exTitle = qPosts.title.contains(keyword);
-        BooleanExpression exContent = qPosts.content.contains(keyword);
-        BooleanExpression exAll = exTitle.or(exContent);
-        builder.and(exAll);
-        builder.and(qPosts.id.gt(0L));
-        Page<Posts> result = postsRepository.findAll(builder, pageable);
-        result.stream().forEach(post -> {
-            System.out.println(post);
-        });
-    }
-
-
+//    @Test
+//    public void testQuerydsl(){
+//        Pageable pageable = PageRequest.of(0,10, Sort.by("id").descending());
+//        QPosts qPosts = QPosts.posts;
+//        String keyword = "1";
+//        BooleanBuilder builder = new BooleanBuilder();
+//        BooleanExpression expression = qPosts.title.contains(keyword);
+//        builder.and(expression);
+//        Page<Posts> result = postsRepository.findAll(builder, pageable);
+//
+//        result.stream().forEach(post -> {
+//            System.out.println(post);
+//        });
+//    }
+//
+//    @Test
+//    public void testQuerydsl2(){
+//        Pageable pageable = PageRequest.of(0,10, Sort.by("id").descending());
+//        QPosts qPosts = QPosts.posts;
+//        String keyword = "1";
+//        BooleanBuilder builder = new BooleanBuilder();
+//        BooleanExpression exTitle = qPosts.title.contains(keyword);
+//        BooleanExpression exContent = qPosts.content.contains(keyword);
+//        BooleanExpression exAll = exTitle.or(exContent);
+//        builder.and(exAll);
+//        builder.and(qPosts.id.gt(0L));
+//        Page<Posts> result = postsRepository.findAll(builder, pageable);
+//        result.stream().forEach(post -> {
+//            System.out.println(post);
+//        });
+//    }
 
 
 }
