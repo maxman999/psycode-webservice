@@ -27,12 +27,17 @@
                             <textarea class="form-control" id="content">[[${post.content}]]</textarea>
                         </div>
                     </form>
-                    <a href="/" role="button" class="btn btn-secondary">취소</a>
+                    <a th:href="@{/posts/read(page=${page})}" role="button" class="btn btn-secondary">취소</a>
                     <button type="button" class="btn btn-primary" id="btn-update">수정 완료</button>
                     <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
                 </div>
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        /* post.js 스크립트를 불러 올 때, 타임리프 적용이 안되기 때문에 page의 값을 별도로 지정해 주었다.
+           추후 수정할 필요 있음. */
+        var page = [[${page}]];
+    </script>
 </th:block>
 </html>

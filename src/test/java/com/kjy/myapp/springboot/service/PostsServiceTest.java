@@ -37,5 +37,24 @@ public class PostsServiceTest {
         System.out.println("페이지 번호-----------------------------------------");
         resultDTO.getPageList().forEach(i -> System.out.print(i+" "));
     }
+    @Test
+    public void testSerch(){
+        PageRequestDto pageRequestDto = PageRequestDto.builder()
+                .page(1)
+                .size(10)
+                .type("tc")
+                .keyword("한글")
+                .build();
+        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDto);
 
+        System.out.println("PREV: " + resultDTO.isPrev());
+        System.out.println("NEXT: " + resultDTO.isNext());
+        System.out.println("TOTAL: " + resultDTO.getTotalPage());
+        System.out.println("postsDTO-----------------------------------------");
+        for (PostsListResponseDto postsListResponseDto : resultDTO.getDtoList()){
+            System.out.println(postsListResponseDto);
+        }
+        System.out.println("페이지 번호-----------------------------------------");
+        resultDTO.getPageList().forEach(i -> System.out.print(i+" "));
+    }
 }
