@@ -14,7 +14,7 @@
                         </div>
                         <div class="form-group">
                             <label for="author"> 작성자 </label>
-                            <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+                            <input type="text" class="form-control" id="author" th:value="${userEmail}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="content"> 내용 </label>
@@ -27,5 +27,10 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        // post.js 스크립트를 불러 올 때, 타임리프 적용이 안되기 때문에 page의 값을 별도로 지정해 주었다.
+        // 추후 수정할 필요 있음.
+        var page = [[${page}]];
+    </script>
 </th:block>
 </html>

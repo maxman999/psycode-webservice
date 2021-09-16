@@ -20,28 +20,28 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){
-        model.addAttribute("posts", postsService.findAllDesc());
-        if(user != null){
+    public String index(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
             model.addAttribute("userName", user.getName());
         }
         return "index";
     }
 
     @GetMapping("posts/read")
-    public String postRead(Model model, PageRequestDto pageRequestDTO){
+    public String postRead(Model model, PageRequestDto pageRequestDTO) {
         model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO));
         model.addAttribute("request", pageRequestDTO);
         return "view/posts/posts-read";
     }
 
     @GetMapping("posts/save")
-    public String postsSave(){
+    public String postsSave(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("userEmail", user.getEmail());
         return "view/posts/posts-save";
     }
 
     @GetMapping("posts/update/{id}")
-    public String postUpdate(@PathVariable Long id, @RequestParam int page, Model model){
+    public String postUpdate(@PathVariable Long id, @RequestParam int page, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
         model.addAttribute("page", page);

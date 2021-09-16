@@ -6,7 +6,6 @@ import com.kjy.myapp.springboot.domain.posts.QPosts;
 import com.kjy.myapp.springboot.web.dto.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,33 +23,36 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto requestDto){
+    public Long save(PostsSaveRequestDto requestDto) {
+        System.out.println("service");
+        System.out.println("toEntity : " + requestDto.toEntity());
+        System.out.println("save : " + postsRepository.save(requestDto.toEntity()));
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 
     @Transactional
-    public Long update(Long id, PostsUpdateRequestDto requestDto){
+    public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         posts.update(requestDto.getTitle(), requestDto.getContent());
         return id;
     }
 
-    public PostsResponseDto findById(Long id){
+    public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         return new PostsResponseDto(entity);
     }
 
     @Transactional(readOnly = true)
-    public List<PostsListResponseDto> findAllDesc(){
+    public List<PostsListResponseDto> findAllDesc() {
         return postsRepository.findAllDESC().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public PageResultDto<PostsListResponseDto, Posts> getListWithPaging(PageRequestDto requestDTO){
+    public PageResultDto<PostsListResponseDto, Posts> getListWithPaging(PageRequestDto requestDTO) {
         Pageable pageable = requestDTO.getPageable(Sort.by("id").descending());
         BooleanBuilder booleanBuilder = getSearch(requestDTO); // 검색 처리
         Page<Posts> result = postsRepository.findAll(booleanBuilder, pageable); // querydsl 적용
@@ -59,13 +61,13 @@ public class PostsService {
     }
 
     @Transactional()
-    public void delete (Long id){
+    public void delete(Long id) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         postsRepository.delete(posts);
     }
 
-    private BooleanBuilder getSearch(PageRequestDto requestDto){
+    private BooleanBuilder getSearch(PageRequestDto requestDto) {
         // Querydsl 처리
         String type = requestDto.getType();
         BooleanBuilder booleanBuilder = new BooleanBuilder();
@@ -73,18 +75,18 @@ public class PostsService {
         String keyword = requestDto.getKeyword();
         BooleanExpression expression = qPosts.id.gt(0L); // id > 0 조건만 생성
         booleanBuilder.and(expression);
-        if(type == null || type.trim().length() == 0){ // 검색 조건이 없는 경우
+        if (type == null || type.trim().length() == 0) { // 검색 조건이 없는 경우
             return booleanBuilder;
         }
         // 검색 조건을 작성하기
         BooleanBuilder conditionalBuilder = new BooleanBuilder();
-        if(type.contains("t")){
+        if (type.contains("t")) {
             conditionalBuilder.or(qPosts.title.contains(keyword));
         }
-        if(type.contains("c")){
+        if (type.contains("c")) {
             conditionalBuilder.or(qPosts.content.contains(keyword));
         }
-        if(type.contains("w")){
+        if (type.contains("w")) {
             conditionalBuilder.or(qPosts.author.contains(keyword));
         }
         // 모든 조건 통합

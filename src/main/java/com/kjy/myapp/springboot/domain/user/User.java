@@ -11,15 +11,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class User extends BaseTimeEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String email;
 
     @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
-    private String email;
 
     @Column
     private String picture;

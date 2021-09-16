@@ -1,6 +1,7 @@
 package com.kjy.myapp.springboot.domain.posts;
 
 import com.kjy.myapp.springboot.domain.BaseTimeEntity;
+import com.kjy.myapp.springboot.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +25,14 @@ public class Posts extends BaseTimeEntity {
     @Column(columnDefinition = "Text", nullable = false)
     private String content;
 
-    private String author;
+    @ManyToOne
+    private User user; //author
 
     @Builder
-    public Posts(String title, String content, String author){
+    public Posts(String title, String content, User user){
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.user = user;
     }
 
     public void update(String title, String content){

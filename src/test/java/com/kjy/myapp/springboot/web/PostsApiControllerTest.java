@@ -3,6 +3,9 @@ package com.kjy.myapp.springboot.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjy.myapp.springboot.domain.posts.Posts;
 import com.kjy.myapp.springboot.domain.posts.PostsRepository;
+import com.kjy.myapp.springboot.domain.user.Role;
+import com.kjy.myapp.springboot.domain.user.User;
+import com.kjy.myapp.springboot.domain.user.UserRepository;
 import com.kjy.myapp.springboot.web.dto.PostsSaveRequestDto;
 import com.kjy.myapp.springboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
@@ -45,6 +48,9 @@ public class PostsApiControllerTest {
     private PostsRepository postsRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private WebApplicationContext context;
 
     private MockMvc mvc;
@@ -55,11 +61,20 @@ public class PostsApiControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
+
+        User userTest = User.builder()
+                .picture("testImg")
+                .email("testEmail")
+                .name("testName")
+                .role(Role.USER)
+                .build();
+        userRepository.save(userTest);
     }
 
     @After
     public void tearDown() throws Exception {
         postsRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -68,10 +83,12 @@ public class PostsApiControllerTest {
         //given
         String title = "title";
         String content = "content";
+        User user = userRepository.findAll().get(0);
+
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title(title)
                 .content(content)
-                .author("author")
+                .author(user.getEmail())
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
@@ -92,10 +109,11 @@ public class PostsApiControllerTest {
     @WithMockUser(roles="USER")
     public void Posts_update() throws Exception {
         //given
+        User user = userRepository.findAll().get(0);
         Posts savedPosts = postsRepository.save(Posts.builder()
                 .title("title")
                 .content("content")
-                .author("author")
+                .user(user)
                 .build());
 
         Long updateId = savedPosts.getId();
