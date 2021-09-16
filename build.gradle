@@ -63,7 +63,7 @@ querydsl {
     querydslSourcesDir = querydslDir
 }
 sourceSets {
-    main.java.srcDir querydslDir
+    main.java.srcDirs += [ querydslDir ]
 }
 configurations {
     querydsl.extendsFrom compileClasspath
