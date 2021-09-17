@@ -2,13 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic}">
 
+
 <th:block layout:fragment="content">
+    <link href="/css/news.css" rel="stylesheet"/>
+
     <div class="container">
-        <div class="raw">
-            <table class="table news-table">
-            </table>
+        <div class="row">
+            <div id = "ol-news" class="list-group list-group-numbered">
+            </div>
         </div>
+            <form class="scrapForm" action="" method="post">
+                <input type="hidden" name="title">
+                <input type="hidden" name="description">
+                <input type="hidden" name="originallink">
+                <input type="hidden" name="pubDate">
+            </form>
     </div>
     <script th:inline="javascript" th:src="@{/js/app/news.js}"></script>
+    <script src="https://kit.fontawesome.com/71053a34c9.js" crossorigin="anonymous"></script>
 </th:block>
 </html>

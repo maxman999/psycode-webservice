@@ -1,0 +1,13 @@
+#ol-news {
+    width : 80%;
+}
+#div-desc {
+    width : 90%;
+}
+.row{
+    justify-content : center;
+}
+#btn-scrap{
+    position : relative;
+    top : 25%;
+}
