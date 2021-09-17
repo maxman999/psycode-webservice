@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic}">
+
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="raw">
+            <table class="table news-table">
+            </table>
+        </div>
+    </div>
+    <script th:inline="javascript" th:src="@{/js/app/news.js}"></script>
+</th:block>
+</html>

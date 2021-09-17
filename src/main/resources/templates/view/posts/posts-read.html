@@ -62,10 +62,6 @@
             </nav>
         </div>
     </div>
-    <script th:inline="javascript">
-       // post.js 스크립트를 불러 올 때, 타임리프 적용이 안되기 때문에 page의 값을 별도로 지정해 주었다.
-       // 추후 수정할 필요 있음.
-       var page = [[${page}]];
-    </script>
+    <script th:inline="javascript" th:src="@{/js/app/posts.js}"></script>
 </th:block>
 </html>

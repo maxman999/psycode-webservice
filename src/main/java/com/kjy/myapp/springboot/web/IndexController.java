@@ -47,4 +47,9 @@ public class IndexController {
         model.addAttribute("page", page);
         return "view/posts/posts-update";
     }
+
+    @GetMapping("news")
+    public String news() {
+        return "view/news/read";
+    }
 }
