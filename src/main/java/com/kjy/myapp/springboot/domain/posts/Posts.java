@@ -20,24 +20,36 @@ public class Posts extends BaseTimeEntity {
     private Long id;
 
     @Column(length = 500, nullable = false)
-    private String title;
+    private String title; // news title
 
     @Column(columnDefinition = "Text", nullable = false)
-    private String content;
+    private String description; // news description
+
+    @Column(nullable = false)
+    private  String originallink; // news link
+
+    @Column(nullable = false)
+    private  String pubdate; // news pubdate
+
+    @Column(nullable = true)
+    private String summary; // news summary created by author
 
     @ManyToOne
     private User user; //author
 
     @Builder
-    public Posts(String title, String content, User user){
+    public Posts(String title, String description, String originallink, String pubdate, String summary ,User user){
         this.title = title;
-        this.content = content;
+        this.description = description;
+        this.originallink = originallink;
+        this.pubdate = pubdate;
+        this.summary = summary;
         this.user = user;
     }
 
-    public void update(String title, String content){
+    public void update(String title, String description){
         this.title = title;
-        this.content = content;
+        this.description = description;
     }
 
 

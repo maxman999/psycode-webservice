@@ -54,7 +54,7 @@ public class PostsServiceTest {
         User user = userRepository.findAll().get(0);
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title("title")
-                .content("content")
+                .description("content")
                 .author(user.getEmail())
                 .build();
         postsService.save(requestDto);

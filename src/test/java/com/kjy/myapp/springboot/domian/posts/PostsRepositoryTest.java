@@ -58,12 +58,12 @@ public class PostsRepositoryTest {
     public void testInsertAndSelect() {
         //given
         String title = "테스트 게시글";
-        String content = "테스트 본문";
+        String description = "테스트 본문";
         User user = userRepository.findAll().get(0);
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .author(user.getEmail())
                 .title(title)
-                .content(content)
+                .description(description)
                 .build();
 
         postsRepository.save(requestDto.toEntity());
@@ -75,41 +75,41 @@ public class PostsRepositoryTest {
         //then
         Posts posts = postList.get(0);
         assertThat(posts.getTitle()).isEqualTo(title);
-        assertThat(posts.getContent()).isEqualTo(content);
+        assertThat(posts.getDescription()).isEqualTo(description);
         assertThat(posts.getUser().getEmail()).isEqualTo(user.getEmail());
     }
 
     @Test
     public void testUpdate() {
         String title = "테스트 게시글";
-        String content = "테스트 본문";
-        String content2 = "테스트 본문2";
+        String description = "테스트 본문";
+        String description2 = "테스트 본문2";
         User user = userRepository.findAll().get(0);
 
         Posts posts = Posts.builder()
                 .title(title)
-                .content(content)
+                .description(description)
                 .user(user)
                 .build();
-        System.out.println("before update: " + postsRepository.save(posts).getContent());
-        assertThat(posts.getContent()).isEqualTo(content);
-        posts.update(title, content2);
-        System.out.println("after update: " + postsRepository.save(posts).getContent());
-        assertThat(posts.getContent()).isEqualTo(content2);
+        System.out.println("before update: " + postsRepository.save(posts).getDescription());
+        assertThat(posts.getDescription()).isEqualTo(description);
+        posts.update(title, description2);
+        System.out.println("after update: " + postsRepository.save(posts).getDescription());
+        assertThat(posts.getDescription()).isEqualTo(description2);
     }
 
     @Test
     public void testDelete() {
         String title = "테스트 게시글";
-        String content = "테스트 본문";
+        String description = "테스트 본문";
         User user = userRepository.findAll().get(0);
 
         Posts posts = Posts.builder()
                 .title(title)
-                .content(content)
+                .description(description)
                 .user(user)
                 .build();
-        System.out.println("before delete : " + postsRepository.save(posts).getContent());
+        System.out.println("before delete : " + postsRepository.save(posts).getDescription());
         postsRepository.deleteAll();
         assertThat(postsRepository.findAll()).isEmpty();
     }
@@ -122,7 +122,7 @@ public class PostsRepositoryTest {
 
         postsRepository.save(Posts.builder()
                 .title("title")
-                .content("content")
+                .description("content")
                 .user(user)
                 .build());
         //when
@@ -143,7 +143,7 @@ public class PostsRepositoryTest {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Posts posts = Posts.builder()
                     .user(user)
-                    .content("testContent" + i)
+                    .description("testContent" + i)
                     .title("testTitle" + i)
                     .build();
             postsRepository.save(posts);

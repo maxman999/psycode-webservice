@@ -8,16 +8,19 @@ var main = {
             _this.update();
         });
         $('#btn-delete').on('click', function(){
-            console.log("?");
             _this.delete();
         });
     },
     save : function () {
         var data = {
             title : $('#title').val(),
+            originallink : $('#originallink').val(),
             author : $('#author').val(),
-            content : $('#content').val()
+            description : $('#description').val(),
+            pubdate : $('#pubdate').val(),
+            summary : $('#summary').val(),
         };
+        console.log(data);
         $.ajax({
             type : 'POST',
             url : '/api/v1/posts',

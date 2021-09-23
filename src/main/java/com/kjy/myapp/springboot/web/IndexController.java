@@ -5,11 +5,13 @@ import com.kjy.myapp.springboot.config.auth.dto.SessionUser;
 import com.kjy.myapp.springboot.service.posts.PostsService;
 import com.kjy.myapp.springboot.web.dto.PageRequestDto;
 import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
+import com.kjy.myapp.springboot.web.dto.ScrapRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
@@ -35,10 +37,18 @@ public class IndexController {
     }
 
     @GetMapping("posts/save")
-    public String postsSave(Model model, @LoginUser SessionUser user) {
+    public String postsSaveGet(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
         return "view/posts/posts-save";
     }
+
+    @PostMapping("posts/save")
+    public String postsSavePost(Model model, @LoginUser SessionUser user, ScrapRequestDto scrapRequestDto) {
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("news", scrapRequestDto);
+        return "view/posts/posts-save";
+    }
+
 
     @GetMapping("posts/update/{id}")
     public String postUpdate(@PathVariable Long id, @RequestParam int page, Model model) {

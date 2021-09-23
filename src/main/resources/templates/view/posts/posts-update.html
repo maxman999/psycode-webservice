@@ -34,6 +34,9 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        var page = [[${page}]];
+    </script>
     <script th:inline="javascript" th:src="@{/js/app/posts.js}"></script>
 </th:block>
 </html>

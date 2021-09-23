@@ -1,6 +1,5 @@
 package com.kjy.myapp.springboot.web;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -46,7 +45,6 @@ public class NewsController {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL, requestHeaders);
 
-        System.out.println(responseBody);
         return responseBody;
     }
 
