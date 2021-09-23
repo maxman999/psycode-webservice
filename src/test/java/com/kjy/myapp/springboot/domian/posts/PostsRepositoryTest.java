@@ -61,9 +61,12 @@ public class PostsRepositoryTest {
         String description = "테스트 본문";
         User user = userRepository.findAll().get(0);
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
-                .author(user.getEmail())
                 .title(title)
                 .description(description)
+                .pubdate("2021-09-23")
+                .originallink("www.kjy.com")
+                .summary("test")
+                .author(user.getEmail())
                 .build();
 
         postsRepository.save(requestDto.toEntity());
@@ -84,11 +87,17 @@ public class PostsRepositoryTest {
         String title = "테스트 게시글";
         String description = "테스트 본문";
         String description2 = "테스트 본문2";
+        String summary = "summary";
+        String originallink = "www.kjy.com";
+        String pubdate = "2021-09-23";
         User user = userRepository.findAll().get(0);
 
         Posts posts = Posts.builder()
                 .title(title)
                 .description(description)
+                .summary(summary)
+                .originallink(originallink)
+                .pubdate(pubdate)
                 .user(user)
                 .build();
         System.out.println("before update: " + postsRepository.save(posts).getDescription());
@@ -102,11 +111,18 @@ public class PostsRepositoryTest {
     public void testDelete() {
         String title = "테스트 게시글";
         String description = "테스트 본문";
+        String description2 = "테스트 본문2";
+        String summary = "summary";
+        String originallink = "www.kjy.com";
+        String pubdate = "2021-09-23";
         User user = userRepository.findAll().get(0);
 
         Posts posts = Posts.builder()
                 .title(title)
                 .description(description)
+                .summary(summary)
+                .originallink(originallink)
+                .pubdate(pubdate)
                 .user(user)
                 .build();
         System.out.println("before delete : " + postsRepository.save(posts).getDescription());
@@ -123,6 +139,9 @@ public class PostsRepositoryTest {
         postsRepository.save(Posts.builder()
                 .title("title")
                 .description("content")
+                .summary("summary")
+                .originallink("www.kjy.com")
+                .pubdate("2021-09-23")
                 .user(user)
                 .build());
         //when
@@ -142,9 +161,12 @@ public class PostsRepositoryTest {
 
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Posts posts = Posts.builder()
+                    .title("title")
+                    .description("content")
+                    .summary("summary")
+                    .originallink("www.kjy.com")
+                    .pubdate("2021-09-23")
                     .user(user)
-                    .description("testContent" + i)
-                    .title("testTitle" + i)
                     .build();
             postsRepository.save(posts);
         });
@@ -201,7 +223,7 @@ public class PostsRepositoryTest {
         String keyword = "1";
         BooleanBuilder builder = new BooleanBuilder();
         BooleanExpression exTitle = qPosts.title.contains(keyword);
-        BooleanExpression exContent = qPosts.content.contains(keyword);
+        BooleanExpression exContent = qPosts.description.contains(keyword);
         BooleanExpression exAll = exTitle.or(exContent);
         builder.and(exAll);
         builder.and(qPosts.id.gt(0L));

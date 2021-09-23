@@ -55,6 +55,9 @@ public class PostsServiceTest {
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title("title")
                 .description("content")
+                .pubdate("2021-09-23")
+                .originallink("www.kjy.com")
+                .summary("test")
                 .author(user.getEmail())
                 .build();
         postsService.save(requestDto);

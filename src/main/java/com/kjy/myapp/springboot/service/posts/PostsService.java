@@ -81,7 +81,7 @@ public class PostsService {
             conditionalBuilder.or(qPosts.title.contains(keyword));
         }
         if (type.contains("c")) {
-            conditionalBuilder.or(qPosts.content.contains(keyword));
+            conditionalBuilder.or(qPosts.description.contains(keyword));
         }
         if (type.contains("w")) {
             conditionalBuilder.or(qPosts.user.name.contains(keyword));

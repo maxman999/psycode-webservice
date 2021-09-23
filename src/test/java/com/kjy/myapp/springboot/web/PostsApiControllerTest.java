@@ -82,13 +82,19 @@ public class PostsApiControllerTest {
     public void Posts_register() throws Exception {
         //given
         String title = "title";
-        String content = "content";
+        String description = "description";
+        String summary = "summary";
+        String pubdate = "2021-09-23";
+        String originallink = "www.kjy.com";
         User user = userRepository.findAll().get(0);
 
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title(title)
-                .description(content)
+                .description(description)
                 .author(user.getEmail())
+                .summary(summary)
+                .pubdate(pubdate)
+                .originallink(originallink)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
@@ -102,7 +108,7 @@ public class PostsApiControllerTest {
         //then
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
-        assertThat(all.get(0).getDescription()).isEqualTo(content);
+        assertThat(all.get(0).getDescription()).isEqualTo(description);
     }
 
     @Test
@@ -112,7 +118,10 @@ public class PostsApiControllerTest {
         User user = userRepository.findAll().get(0);
         Posts savedPosts = postsRepository.save(Posts.builder()
                 .title("title")
-                .description("content")
+                .description("description")
+                .summary("summary")
+                .originallink("www.kjy.com")
+                .pubdate("2021-09-23")
                 .user(user)
                 .build());
 
