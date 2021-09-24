@@ -49,7 +49,6 @@ public class IndexController {
         return "view/posts/posts-save";
     }
 
-
     @GetMapping("posts/update/{id}")
     public String postUpdate(@PathVariable Long id, @RequestParam int page, Model model) {
         PostsResponseDto dto = postsService.findById(id);
@@ -61,5 +60,10 @@ public class IndexController {
     @GetMapping("news")
     public String news() {
         return "view/news/read";
+    }
+
+    @GetMapping("portfolio")
+    public String portfolio() {
+        return "view/portfolio/read";
     }
 }

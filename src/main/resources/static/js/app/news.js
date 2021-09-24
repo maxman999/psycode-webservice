@@ -20,7 +20,7 @@ var main = {
        			let str = "";
        			for (var i = 0; i < news.length; i++) {
        			    let pubdate = new Date(news[i].pubDate).toISOString().substring(0,10);
-       				str += "<div><li id='news-li' class='list-group-item d-flex justify-content-between align-items-start list-group-item-action'>";
+       				str += "<div><li id='news-li' class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-1'>";
        				str += "<div class='ms-2 me-auto'>";
        				str += "<div class='title fw-bold mb-1'>" + news[i].title + "</div>";
                     str += "<div class='description div-desc'>" + news[i].description + "</div>";

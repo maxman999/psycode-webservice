@@ -8,8 +8,8 @@
 .row{
     justify-content : center;
 }
-.pubDate{
-    justify-content : end;
+.pubdate{
+    display:none;
 }
 .originallink{
     display:none;
