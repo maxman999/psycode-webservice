@@ -8,5 +8,14 @@
     <h1 th:text="${'hello world'}"></h1>
     <h1 th:text="${date}"></h1>
     <h1>[[${#numbers.formatInteger(23,5)}]]</h1>
+
+    <th:block th:each="num: ${#numbers.sequence(1,5)}">
+        <a> hello </a>
+        [[${num}]]
+    </th:block>
+
+
+
+
 </body>
 </html>

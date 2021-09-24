@@ -8,7 +8,7 @@
     <div class = "container">
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <div class="col">
-                <div class="card">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img th:src="@{/img/temp.jpeg}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -45,7 +45,41 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
+                    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img th:src="@{/img/pf/smhrd/pf1.jpg}" class="d-block w-100" alt="...">
+                            </div>
+                            <th:block th:each="num:${#numbers.sequence(2,16)}">
+                                <div class="carousel-item">
+                                    <img th:src="@{'/img/pf/smhrd/pf'+${num}+'.jpg'}" class="d-block w-100" alt="...">
+                                </div>
+                            </th:block>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://kit.fontawesome.com/71053a34c9.js" crossorigin="anonymous"></script>
 </th:block>
