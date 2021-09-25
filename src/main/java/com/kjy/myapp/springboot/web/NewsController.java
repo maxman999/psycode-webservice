@@ -30,7 +30,7 @@ public class NewsController {
     public String getNews(String newsKeyword) {
         String clientId = newsApiId; //애플리케이션 클라이언트 아이디값"
         String clientSecret = newsApiSecret; //애플리케이션 클라이언트 시크릿값"
-        newsKeyword += " 심리";
+        newsKeyword += ""; // 추가로 검색하고 싶은 키워드 입력
         String text = null;
         try {
             text = URLEncoder.encode(newsKeyword, "UTF-8");
@@ -38,7 +38,7 @@ public class NewsController {
             throw new RuntimeException("검색어 인코딩 실패", e);
         }
 
-        String apiURL = "https://openapi.naver.com/v1/search/news.json?query="+text+"&display=6";    // json
+        String apiURL = "https://openapi.naver.com/v1/search/news.json?query="+text+"&display=5";    // json
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml
 
         Map<String, String> requestHeaders = new HashMap<>();

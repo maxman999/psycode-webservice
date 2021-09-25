@@ -39,19 +39,27 @@ var main = {
        	})
     },
     save : function (target){
-        let scrapForm = $(".scrapForm");
-
         let newsNode = target.parent().prev().prev();
-        let title = newsNode.find(".title").text();
-        let description = newsNode.find(".description").text();
-        let originallink = newsNode.find(".originallink").text();
-        let pubdate = newsNode.find(".pubdate").text();
-
-        scrapForm.find("input[name='title']").val(title);
-        scrapForm.find("input[name='description']").val(description);
-        scrapForm.find("input[name='originallink']").val(originallink);
-        scrapForm.find("input[name='pubdate']").val(pubdate);
-        scrapForm.submit();
-    }
+        var data = {
+                    title : newsNode.find(".title").text(),
+                    originallink : newsNode.find(".originallink").text(),
+                    author : userEmail,
+                    description : newsNode.find(".description").text(),
+                    pubdate : newsNode.find(".pubdate").text()
+                    };
+        console.log(data);
+        $.ajax({
+            type : 'POST',
+            url : '/api/v1/posts',
+            dataType : 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data)
+        }).done(function(){
+            alert('글이 등록되었습니다.');
+            window.location.href = '/posts/read';
+        }).fail(function (error){
+            alert(JSON.stringify(error));
+        });
+    },
 }
 main.init();

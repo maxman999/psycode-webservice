@@ -10,23 +10,11 @@
                     <form>
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <th:block th:if="${news != null}">
-                                <input type="text" class="form-control" id="title" th:value="${news.title}" readonly>
-                            </th:block>
-                            <th:block th:if="${news == null}">
-                                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-                            </th:block>
+                            <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
                         </div>
                         <div class="form-group">
                             <label for="originallink">url</label>
-                            <th:block th:if="${news != null}">
-                                <input type="text" class="form-control" id="originallink"
-                                       th:value="${news.originallink}" readonly>
-                            </th:block>
-                            <th:block th:if="${news == null}">
-                                <input type="text" class="form-control" id="originallink"
-                                       placeholder="뉴스 원문 링크를 입력해주세요">
-                            </th:block>
+                            <input type="text" class="form-control" id="originallink" placeholder="뉴스 원문 링크를 입력해주세요">
                         </div>
                         <div class="form-group">
                             <label for="author"> 작성자 </label>
@@ -34,26 +22,13 @@
                         </div>
                         <div class="form-group">
                             <label for="description"> 요약 </label>
-                            <th:block th:if="${news != null}">
-                                <input type="text" class="form-control" id="description" th:value="${news.description}"
-                                       readonly>
-                            </th:block>
-                            <th:block th:if="${news == null}">
-                                <input type="text" class="form-control" id="description" placeholder="뉴스 요약을 입력하세요">
-                            </th:block>
+                            <input type="text" class="form-control" id="description" placeholder="뉴스 요약을 입력하세요">
                         </div>
                         <div class="form-group">
                             <label for="summary"> 내용 </label>
                             <textarea class="form-control" id="summary" placeholder="내용을 입력하세요"></textarea>
                         </div>
-
-                        <th:block th:if="${news != null}">
-                            <input type="hidden" id="pubdate" th:value="${news.pubdate}">
-                        </th:block>
-                        <th:block th:if="${news == null}">
-                            <input type="date" class="form-control" id="pubdate">
-                        </th:block>
-
+                        <input type="date" class="form-control" id="pubdate">
                     </form>
                     <a href="/" role="button" class="btn btn-secondary">취소</a>
                     <button type="button" class="btn btn-primary" id="btn-save">등록</button>

@@ -58,7 +58,8 @@ public class IndexController {
     }
 
     @GetMapping("news")
-    public String news() {
+    public String news(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("userEmail", user.getEmail());
         return "view/news/read";
     }
 
