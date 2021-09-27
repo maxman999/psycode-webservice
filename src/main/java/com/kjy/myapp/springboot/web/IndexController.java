@@ -30,9 +30,10 @@ public class IndexController {
     }
 
     @GetMapping("posts/read")
-    public String postRead(Model model, PageRequestDto pageRequestDTO) {
+    public String postRead(Model model, PageRequestDto pageRequestDTO, @RequestParam int page) {
         model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO));
         model.addAttribute("request", pageRequestDTO);
+        model.addAttribute("page", page);
         return "view/posts/posts-read";
     }
 

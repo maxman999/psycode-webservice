@@ -5,19 +5,19 @@
 <body>
 <th:block th:fragment="headerFragment">
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">PsyCode 1.0.0</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">About</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/portfolio}">Portfolio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/news}">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/posts/read}">Scrap</a>
                     </li>
                 </ul>
             </div>

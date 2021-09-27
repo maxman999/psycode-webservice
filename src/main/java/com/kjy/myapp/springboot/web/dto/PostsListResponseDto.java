@@ -13,12 +13,16 @@ public class PostsListResponseDto {
     private Long id;
     private String title;
     private User user;
+    private String description;
     private LocalDateTime modifiedDate;
+    private String originallink;
 
     public PostsListResponseDto(Posts entity){
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.user = entity.getUser();
+        this.description =entity.getDescription();
+        this.originallink =entity.getOriginallink();
         this.modifiedDate = entity.getModifiedDate();
     }
 

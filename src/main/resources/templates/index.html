@@ -4,8 +4,33 @@
 
 <th:block layout:fragment="content">
     <div class="container">
-        <div class="row">
-            Comming Soon !
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <h1>About</h1>
+                <hr>
+                <!-- about me -->
+                <div class="row">
+                    <div class="col-md-3 justify-content-center">
+                        <p style="text-align: center;"><img class="rounded-circle" th:src="@{img/pf/start.jpg}" width="150" , height="150"></p>
+                    </div>
+                    <div class="col-md-9">
+                        <ul>
+                            <li> 데이터베이스로는 무료로 배포할 수 있는 mysql을 이용했다.</li>
+                            <li> 백엔드는 자바 기반의 스프링 프레임 워크를 이용했으며, 프론트엔드는 자바스크립트를 이용해 구현했다.</li>
+                            <li> 딥러닝 모델 구축은 파이썬의 텐서플로우 라이브러리를 이용해서 CNN기반의 모델을 구축을 했다.</li>
+                            <li> 플라스크 프레임 워크를 이용해 딥러닝 모델과 웹 서비스를 연동했다.</li>
+                            <li> 깃과 깃허브를 버전관리 및 협업 도구로 사용했다.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /about me -->
+                <hr>
+                <h3>PsyCode Project</h3>
+                화초 식별과 질병진단에 사용된 모델은 이미지 처리에 특화된 CNN 기반의 여러 모델을 사용해 봤으나, 가장 높은 정확도를 보였던 InceptionV3 모델을 선정했다. 반려식물 식별
+                모델은 총 14,000개의 데이터셋을 학습한 결과 관엽식물 20개 클래스에 대해서 약 90%의 정확도로 분류할 수 있었다. 질병진단 모델은 약 1,500개의 질병 데이터 셋을 학습한 결과
+                3개의 클래스에 대해서 약 94%확률로 진단할 수 있었다. 하지만, 질병진단 모델은 입력받은 이미지에 질병에 걸린 잎사귀 이외의 잡음(noise)이 섞여있을 때 모델의 정확도가 급격하게
+                떨어지는 과적합 문제가 있었다. 추후 이미지 디텍션 혹은 메타러닝과 같은 방법을 통해 보완할 필요가 있다.
+            </div>
         </div>
     </div>
 </th:block>

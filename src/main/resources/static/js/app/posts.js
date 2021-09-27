@@ -7,8 +7,8 @@ var main = {
         $('#btn-update').on('click', function(){
             _this.update();
         });
-        $('#btn-delete').on('click', function(){
-            _this.delete();
+        $('.btn-delete').on('click', function(){
+            _this.delete($(this));
         });
     },
     save : function () {
@@ -29,7 +29,7 @@ var main = {
             data : JSON.stringify(data)
         }).done(function(){
             alert('글이 등록되었습니다.');
-            window.location.href = '/posts/read';
+            window.location.href = '/posts/read?page=1';
         }).fail(function (error){
             alert(JSON.stringify(error));
         });
@@ -53,8 +53,8 @@ var main = {
             alert(JSON.stringify(error))
         });
     },
-    delete : function (){
-        var id = $('#id').val();
+    delete : function (target){
+        var id = target.data(id).id;
         $.ajax({
             type : 'DELETE',
             url : '/api/v1/posts/' + id,

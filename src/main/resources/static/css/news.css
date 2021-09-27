@@ -1,16 +1,9 @@
-#ol-news {
-    width : 80%;
-
-}
 .div-desc {
     width : 90%;
 }
-.row{
-    justify-content : center;
-}
-.pubdate{
-    display:none;
-}
-.originallink{
-    display:none;
+
+.news-btn{
+    width: 80px;
+    height: 35px;
+    margin-bottom : 3px;
 }
