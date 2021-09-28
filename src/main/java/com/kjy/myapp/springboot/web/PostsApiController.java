@@ -15,7 +15,6 @@ public class PostsApiController {
 
     @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-        System.out.println("here! : " + requestDto.toString());
         return postsService.save(requestDto);
     }
 
@@ -34,4 +33,13 @@ public class PostsApiController {
         postsService.delete(id);
         return id;
     }
+
+    @PostMapping("/api/v1/posts/check")
+    public boolean check(@RequestBody PostsSaveRequestDto requestDto){
+        System.out.println("오긴 옴");
+        String title = requestDto.getTitle();
+        System.out.println("title : " + title);
+        return postsService.check(title);
+    }
+
 }

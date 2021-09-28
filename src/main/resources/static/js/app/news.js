@@ -3,16 +3,28 @@ var main = {
         let _this = this;
         _this.show();
 
-        $('#ol-news').on('click','.btn-scrap',function(){
-            _this.save($(this));
+        $('.ol-news').on('click','.btn-scrap',function(){
+            let targetDiv = $(this).parent().parent().prev();
+            let isDuple = _this.check(targetDiv);
+            if(isDuple === false){
+                alert("이미 등록된 기사입니다.");
+            }else if(isDuple === true){
+                _this.save(targetDiv);
+            }
         });
 
-        $("#keyword-serch").on('click', function(){
+        $("#keyword-search").on('click', function(){
             let keyword = $('#keyword-input').val();
             _this.show(keyword);
         })
+
+        $(".btn-criteria").on('click', function(){
+            let keyword = _this.criteria($(this).attr("id"));
+            _this.show(keyword);
+        })
+
     },
-    show : function (inputkey) {
+    show : function(inputkey) {
         var newsKeyword;
         if(inputkey == null){
             newsKeyword = "인공지능";
@@ -49,7 +61,7 @@ var main = {
        				    str = "";
        				}
        			}
-       			$("#ol-news").html(strArr[0]);
+       			$("#ol-news-main").html(strArr[0]);
                 for( var i = 1 ; i < strArr.length ; i++ ){
                     $(`#newsCollapse${i}`).html(strArr[i]);
                 }
@@ -60,13 +72,12 @@ var main = {
        	})
     },
     save : function (target){
-        let newsNode = target.parent().parent().prev();
         var data = {
-                    title : newsNode.find(".title").text(),
-                    originallink : newsNode.find(".originallink").text(),
+                    title : target.find(".title").text(),
+                    originallink : target.find(".originallink").text(),
                     author : userEmail,
-                    description : newsNode.find(".description").text(),
-                    pubdate : newsNode.find(".pubdate").text()
+                    description : target.find(".description").text(),
+                    pubdate : target.find(".pubdate").text()
                     };
         $.ajax({
             type : 'POST',
@@ -76,10 +87,41 @@ var main = {
             data : JSON.stringify(data)
         }).done(function(){
             alert('글이 등록되었습니다.');
-            window.location.href = '/posts/read?page=1';
+            // window.location.href = '/posts/read?page=1';
         }).fail(function (error){
             alert(JSON.stringify(error));
         });
+    },
+    criteria : function(targetId){
+        let keyword;
+        if(targetId == "it"){
+            keyword = "인공지능";
+        }else if(targetId == "entertainment"){
+            keyword = "연예";
+        }else if(targetId == "politics"){
+            keyword = "정치";
+        }
+        return keyword;
+    },
+    check : function (target) {
+        let title = target.find(".title").text();
+        var data = {
+                    title : target.find(".title").text()
+                    };
+        let isDuple;
+        $.ajax({
+            type : 'POST',
+            url : '/api/v1/posts/check',
+            dataType : 'json',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
+            async: false
+        }).done(function(result){
+            isDuple =  result;
+        }).fail(function (error){
+            alert(JSON.stringify(error));
+        });
+        return isDuple;
     }
 }
 main.init();

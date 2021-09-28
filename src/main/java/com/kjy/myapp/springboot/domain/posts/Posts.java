@@ -9,7 +9,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
 @Getter
 @NoArgsConstructor
 @Entity
@@ -34,7 +33,7 @@ public class Posts extends BaseTimeEntity {
     @Column(nullable = true)
     private String summary; // news summary created by author
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user; //author
 
     @Builder

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap Sign in Form with Social Login Buttons</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/login.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row login-form">
+        <form class = "form-group">
+            <h1 class="text-center">Sign in</h1>
+            <div class="hint-text small">with your social media account</div>
+            <div class="text-center social-btn">
+                <div class="row">
+                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+                        <a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+                        <a href="/oauth2/authorization/naver" class="btn btn-info btn-block"><i class="fa fa"><bold>N</bold></i> Sign in with <b>Naver</b></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+                        <a href="/oauth2/authorization/google" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign in with <b>Google</b></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4" style = "float: none; margin: 0 auto;">
+                        <div class="or-seperator"><i>or</i></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+                        <a href="#" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Use as a <b>Guset</b></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

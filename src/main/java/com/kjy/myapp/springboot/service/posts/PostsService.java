@@ -90,4 +90,10 @@ public class PostsService {
         booleanBuilder.and(conditionalBuilder);
         return booleanBuilder;
     }
+
+    public boolean check(String title) {
+        Posts entity = postsRepository.check(title);
+        boolean chk = (entity == null) ? false : true;
+        return chk;
+    }
 }

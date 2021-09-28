@@ -1,0 +1,55 @@
+	.login-form {
+		width: 650px;
+    	margin: 170px auto;
+	}
+    .login-form form {
+        height: 430px;
+    	margin-bottom: 15px;
+        background:  white;
+        box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
+        padding: 10px 0 40px 0;
+    }
+    .login-form h1 {
+        font-size: 60px;
+
+    }
+    .login-form .hint-text {
+		color: #777;
+		padding-bottom: 15px;
+		text-align: center;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .login-btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .or-seperator {
+        margin-top: 15px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+    }
+    .or-seperator i {
+        padding: 0 10px;
+        background: white;
+        position: relative;
+        top: -11px;
+        z-index: 1;
+    }
+    .social-btn .btn {
+        margin: 5px 0;
+        font-size: 15px;
+        text-align: left;
+        line-height: 24px;
+    }
+	.social-btn .btn i {
+		float: left;
+		margin: 4px 15px  0 5px;
+        min-width: 15px;
+        border: white;
+	}
+	.input-group-addon .fa{
+		font-size: 18px;
+	}

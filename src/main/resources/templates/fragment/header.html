@@ -6,58 +6,26 @@
 <th:block th:fragment="headerFragment">
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">PsyCode 1.0.0</a>
+        <div class="container-fluid nav-div">
+            <a class="navbar-brand" href="/">PsyCode</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">About</a>
+                        <a class="nav-link" th:href="@{/}">ABOUT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/portfolio}">Portfolio</a>
+                        <a class="nav-link" th:href="@{/portfolio}">PORTFOLIO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/news}">News</a>
+                        <a class="nav-link" th:href="@{/news}">NEWS</a>
                     </li>
                 </ul>
             </div>
-            <th:block th:if="${userName != null}">
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            <th:block th:if="${session.user == null}">
+                <a href="/login" class="btn btn-outline-success sign-btn">SIGN IN</a>
             </th:block>
-            <th:block th:if="${userName == null}">
-                <div class="btn-group dropstart">
-                    <button class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown"
-                            data-bs-display="static" aria-expanded="false">Sign In
-                    </button>
-                    <div class="dropdown-menu">
-                        <div class="login-form">
-                            <form>
-                                <h1>Login</h1>
-                                <div class="form-group">
-                                    <input type="email" name="email" placeholder="E-mail Address">
-                                    <span class="input-icon"><i class="fa fa-envelope"></i></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="psw" placeholder="Password">
-                                    <span class="input-icon"><i class="fa fa-lock"></i></span>
-                                </div>
-                                <button class="login-btn">Login</button>
-                                <a class="reset-psw" href="#">Forgot your password?</a>
-                                <div class="seperator"><b>or</b></div>
-                                <p>Sign in with your social media account</p>
-                                <!-- Social login buttons -->
-                                <div class="social-icon">
-                                    <button type="button"
-                                            th:onclick="|location.href='@{/oauth2/authorization/google}'|"><i
-                                            class="fa fa-google"></i></button>
-                                    <button type="button" th:onclick="|location.href='@{/oauth2/authorization/naver}'|">
-                                        <i class="fa fa"></i>N
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <th:block th:if="${session.user != null}">
+                <a href="/logout" class="btn btn-outline-success sign-btn" role="button">SIGN OUT</a>
             </th:block>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
