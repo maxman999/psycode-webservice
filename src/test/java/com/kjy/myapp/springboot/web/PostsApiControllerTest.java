@@ -91,7 +91,7 @@ public class PostsApiControllerTest {
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title(title)
                 .description(description)
-                .author(user.getEmail())
+                .useremail(user.getEmail())
                 .summary(summary)
                 .pubdate(pubdate)
                 .originallink(originallink)

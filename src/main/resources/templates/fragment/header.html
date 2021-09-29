@@ -5,7 +5,7 @@
 <body>
 <th:block th:fragment="headerFragment">
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom mb-5">
         <div class="container-fluid nav-div">
             <a class="navbar-brand" href="/">PsyCode</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -25,7 +25,18 @@
                 <a href="/login" class="btn btn-outline-success sign-btn">SIGN IN</a>
             </th:block>
             <th:block th:if="${session.user != null}">
-                <a href="/logout" class="btn btn-outline-success sign-btn" role="button">SIGN OUT</a>
+                <div class="btn-group">
+                    <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="rounded-circle" th:src="@{${session.user.picture}}" width="45" height="45"><i class="fas fa-long-arrow-alt-down setting-icon"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end user-info">
+                        <ul class="list-group shadow-lg">
+                            <li class="list-group-item list-group-item-secondary header-li">[[${session.user.email}]]</li>
+                            <li class="list-group-item list-group-item-action body-li" data-bs-toggle="modal" data-bs-target="#settingModal"><i class="fas fa-cog"></i> Setting </li>
+                            <a href="/logout"><li class="list-group-item list-group-item-action body-li"><i class="fas fa-sign-out-alt"></i> Sign Out </li></a>
+                        </ul>
+                    </div>
+                </div>
             </th:block>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -33,8 +44,52 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        </div>
     </nav>
+    <th:block th:if="${session.user != null}">
+        <!-- SettingModal -->
+        <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Keyword Setting</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="keyword-setting">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="keyword1" class="col-form-label">Keyword1</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input name="keyword1_user" type="text" id="keyword1" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="keyword2" class="col-form-label">Keyword2</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input name="keyword2_user" type="text" id="keyword2" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="keyword3" class="col-form-label">Keyword3</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input name="keyword3_user" type="text" id="keyword3" class="form-control">
+                                </div>
+                            </div>
+                            <input name="email" type="hidden" id="email" th:value="${session.user.email}">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary setting-btn">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
 </th:block>
 </body>
 </html>

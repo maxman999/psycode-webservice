@@ -60,7 +60,7 @@ public class PostsServiceTest {
                 .pubdate("2021-09-23")
                 .originallink("www.kjy.com")
                 .summary("test")
-                .author(user.getEmail())
+                .useremail(user.getEmail())
                 .build();
         postsService.save(requestDto);
         //when

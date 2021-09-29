@@ -51,9 +51,4 @@ public class Posts extends BaseTimeEntity {
         this.description = description;
     }
 
-
-
-
-
-
 }

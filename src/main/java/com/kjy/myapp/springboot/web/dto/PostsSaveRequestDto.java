@@ -7,29 +7,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@ToString
 @Getter
 @NoArgsConstructor
 public class PostsSaveRequestDto {
     private String title;
     private String description;
-    private String author;
+    private String useremail;
     private String originallink;
     private String pubdate;
     private String summary;
 
     @Builder
-    public PostsSaveRequestDto(String title, String description, String author, String originallink, String pubdate, String summary){
+    public PostsSaveRequestDto(String title, String description, String useremail, String originallink, String pubdate, String summary){
         this.title = title;
         this.description = description;
-        this.author = author;
+        this.useremail = useremail;
         this.originallink = originallink;
         this.pubdate = pubdate;
         this.summary = summary;
     }
 
     public Posts toEntity(){
-        User user = User.builder().email(author).build();
+        User user = User.builder().email(useremail).build();
         return Posts.builder()
                 .title(title)
                 .description(description)

@@ -18,8 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/","/login" ,"/css/**","/img/**","/js/**","h2-console/**").permitAll()
-                    .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                    .antMatchers("/","/login","/portfolio","/css/**","/img/**","/js/**","h2-console/**").permitAll()
+                    .antMatchers("/api/v1/**", "/news").hasRole(Role.USER.name())
                     .anyRequest().authenticated()
                 .and()
                     .logout()
@@ -29,4 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .userInfoEndpoint()
                             .userService(customOAuth2UserService);
     }
+
+
+
+
 }

@@ -1,5 +1,5 @@
-	.login-form {
-		width: 650px;
+.login-form {
+		width: 600px;
     	margin: 170px auto;
 	}
     .login-form form {
@@ -15,11 +15,11 @@
     }
     .login-form .hint-text {
 		color: #777;
-		padding-bottom: 15px;
 		text-align: center;
     }
     .form-control, .btn {
         min-height: 38px;
+        border: 1px solid black;
         border-radius: 2px;
     }
     .login-btn {
@@ -53,3 +53,6 @@
 	.input-group-addon .fa{
 		font-size: 18px;
 	}
+    hr{
+        width: 60%;
+    }

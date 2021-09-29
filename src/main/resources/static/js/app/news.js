@@ -7,9 +7,9 @@ var main = {
             let targetDiv = $(this).parent().parent().prev();
             let isDuple = _this.check(targetDiv);
             if(isDuple === false){
-                alert("이미 등록된 기사입니다.");
-            }else if(isDuple === true){
                 _this.save(targetDiv);
+            }else if(isDuple === true){
+                alert("이미 등록된 기사입니다.");
             }
         });
 
@@ -65,6 +65,9 @@ var main = {
                 for( var i = 1 ; i < strArr.length ; i++ ){
                     $(`#newsCollapse${i}`).html(strArr[i]);
                 }
+
+                // 매끄러운 화면 전환을 위한 코드
+                $('.main-div').css("display", "block");
        		},
        		error : function(e) {
        			alert("통신 실패");
@@ -75,7 +78,7 @@ var main = {
         var data = {
                     title : target.find(".title").text(),
                     originallink : target.find(".originallink").text(),
-                    author : userEmail,
+                    useremail : userEmail,
                     description : target.find(".description").text(),
                     pubdate : target.find(".pubdate").text()
                     };

@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@ToString
 @Getter
 public class PostsListResponseDto {
     private Long id;

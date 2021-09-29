@@ -66,11 +66,11 @@ public class PostsRepositoryTest {
                 .pubdate("2021-09-23")
                 .originallink("www.kjy.com")
                 .summary("test")
-                .author(user.getEmail())
+                .useremail(user.getEmail())
                 .build();
 
         postsRepository.save(requestDto.toEntity());
-        System.out.println(requestDto.toEntity());
+        System.out.println(requestDto.toEntity().getDescription());
 
         //when
         List<Posts> postList = postsRepository.findAll();

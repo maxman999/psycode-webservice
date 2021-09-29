@@ -1,6 +1,7 @@
 package com.kjy.myapp.springboot.domain.user;
 
 import com.kjy.myapp.springboot.domain.BaseTimeEntity;
+import com.kjy.myapp.springboot.domain.keywords.Keywords;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

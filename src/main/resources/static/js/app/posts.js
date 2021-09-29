@@ -15,7 +15,7 @@ var main = {
         var data = {
             title : $('#title').val(),
             originallink : $('#originallink').val(),
-            author : $('#author').val(),
+            useremail : $('#useremail').val(),
             description : $('#description').val(),
             pubdate : $('#pubdate').val(),
             summary : $('#summary').val(),
