@@ -135,7 +135,7 @@ var main = {
         return new Promise(function(resolve){
             $.ajax({
                 type : 'GET',
-                url : 'http://127.0.0.1:5000/getKeyword',
+                url : 'http://ec2-15-165-82-52.ap-northeast-2.compute.amazonaws.com:5000/getKeyword',
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
             }).done(function(result){
