@@ -1,10 +1,13 @@
 package com.kjy.myapp.springboot.service.keywords;
 
+import com.kjy.myapp.springboot.domain.keywords.Keywords;
 import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
 import com.kjy.myapp.springboot.web.dto.KeywordsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -13,8 +16,14 @@ public class KeywordsService {
 
     @Transactional
     public Long save(KeywordsSaveRequestDto requestDto) {
-        System.out.println(requestDto.toEntity().getUser().getEmail());
-        return keywordsRepository.save(requestDto.toEntity()).getId();
+        Optional<Keywords> opt = keywordsRepository.findByUser_email(requestDto.getUseremail());
+        if(!opt.isPresent()){
+            return keywordsRepository.save(requestDto.toEntity()).getId();
+        }else {
+            Keywords keywords = opt.get();
+            keywords.update(requestDto.getKeyword1_user(), requestDto.getKeyword2_user(), requestDto.getKeyword3_user());
+            return keywords.getId();
+        }
     }
 
 //    @Transactional

@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface KeywordsRepository extends JpaRepository<Keywords,Long> {
     Optional<Keywords> findById(Long id);
+    Optional<Keywords> findByUser_email(String email);
 
 }

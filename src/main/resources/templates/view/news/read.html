@@ -9,46 +9,43 @@
         <div class="row">
             <div class="col-md-10" style="float: none; margin: 0 auto;">
                 <div class='row'>
-                    <div class="col-md-4">
+                    <div class="col-md-7">
                         <span>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <button class="btn btn-outline-dark" type="button"><i class="fas fa-book"></i></button>
+                                <div class="col-md-1">
+                                    <button class="btn btn-outline-dark" type="button"
+                                            th:onclick="|location.href='@{/posts/read?page=1}'|"><i class="fas fa-book"></i></button>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse"
                                             data-bs-target=".menu-collapse" aria-expanded="false"
                                             aria-controls="multiCollapseExample2"><i class="fas fa-stream"></i></button>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="collapse menu-collapse" id="multiCollapseExample1">
-                                        <button id="entertainment" class="btn btn-outline-success btn-criteria"><i
-                                                class="fas fa-tv"></i></button>
+                                        <button id="entertainment" class="btn btn-outline-success btn-criteria"> 1 </button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="collapse menu-collapse" id="multiCollapseExample2">
-                                        <button id="it" class="btn btn-outline-success btn-criteria"><i
-                                                class="fas fa-robot"></i></button>
+                                        <button id="politics" class="btn btn-outline-success btn-criteria"> 2 </button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="collapse menu-collapse" id="multiCollapseExample3">
-                                        <button id="politics" class="btn btn-outline-success btn-criteria"><i
-                                                class="far fa-handshake"></i></button>
+                                        <button id="it" class="btn btn-outline-success btn-criteria"> 3 </button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="collapse menu-collapse" id="multiCollapseExample4">
-                                        <button class="btn btn-outline-success"
-                                                th:onclick="|location.href='@{/posts/read?page=1}'|"><i
-                                                class="far fa-bookmark"></i></button>
+                                        <button id="recommend" class="btn btn-outline-success"><i
+                                                class="fas fa-robot"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </span>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         <div class="d-flex mb-3 float-end">
                             <input name="keyword" id="keyword-input" class="form-control me-2" type="search"
                                    placeholder="키워드를 입력해주세요"

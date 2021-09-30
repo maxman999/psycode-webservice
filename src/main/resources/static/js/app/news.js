@@ -12,18 +12,23 @@ var main = {
                 alert("이미 등록된 기사입니다.");
             }
         });
-
         $("#keyword-search").on('click', function(){
             let keyword = $('#keyword-input').val();
             _this.show(keyword);
         })
-
         $(".btn-criteria").on('click', function(){
             let keyword = _this.criteria($(this).attr("id"));
             _this.show(keyword);
+            $('#keyword-input').val(keyword);
         })
-
+        $("#recommend").on('click', function(){
+            _this.getKeywords().then(function(keyword){
+                _this.show(keyword);
+                $("#keyword-input").val(keyword);
+            });
+        })
     },
+
     show : function(inputkey) {
         var newsKeyword;
         if(inputkey == null){
@@ -125,6 +130,20 @@ var main = {
             alert(JSON.stringify(error));
         });
         return isDuple;
+    },
+    getKeywords : function(){
+        return new Promise(function(resolve){
+            $.ajax({
+                type : 'GET',
+                url : 'http://127.0.0.1:5000/getKeyword',
+                dataType : 'json',
+                contentType : 'application/json; charset=utf-8',
+            }).done(function(result){
+                resolve(result.keyword);
+            }).fail(function (error){
+                alert(JSON.stringify(error));
+            });
+        })
     }
 }
 main.init();
