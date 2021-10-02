@@ -8,47 +8,43 @@
     <div class="container main-div" style="display:none;">
         <div class="row">
             <div class="col-md-10" style="float: none; margin: 0 auto;">
-                <div class='row'>
-                    <div class="col-md-7">
+                <div class='row mb-2'>
+                    <div id = "btn-bar" class="col-md-7">
                         <span>
                             <div class="row">
-                                <div class="col-md-1">
-                                    <button class="btn btn-outline-dark" type="button"
+                                <div class="col-md-2 custom-col">
+                                    <button class="btn btn-outline-secondary tooltips"
+                                            type="button"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="스크랩북 보기"
                                             th:onclick="|location.href='@{/posts/read?page=1}'|"><i class="fas fa-book"></i></button>
                                 </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse"
-                                            data-bs-target=".menu-collapse" aria-expanded="false"
-                                            aria-controls="multiCollapseExample2"><i class="fas fa-stream"></i></button>
+                                <div class="col-md-1 tooltips popover-btn"
+                                     data-bs-toggle="tooltip" data-bs-placement="top" title="키워드로 검색">
+                                    <button type="button"
+                                            class="btn btn-outline-secondary"
+                                            data-bs-container="body"
+                                            data-bs-toggle="popover"
+                                            data-trigger="focus"
+                                            data-bs-placement="right">
+                                        <i class="fas fa-stream"></i></button>
                                 </div>
-                                <div class="col-md-1">
-                                    <div class="collapse menu-collapse" id="multiCollapseExample1">
-                                        <button id="entertainment" class="btn btn-outline-success btn-criteria"> 1 </button>
-                                    </div>
+                                <!-- popover  -->
+                                <div id ="popover-content" class="d-none">
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-action body-li criteria" ><i class="fas fa-angle-right"></i> [[${keywords.keyword1_user}]] </li>
+                                        <li class="list-group-item list-group-item-action body-li criteria" ><i class="fas fa-angle-right"></i> [[${keywords.keyword2_user}]] </li>
+                                        <li class="list-group-item list-group-item-action body-li criteria" ><i class="fas fa-angle-right"></i> [[${keywords.keyword3_user}]] </li>
+                                        <li id="recommend" class="list-group-item list-group-item-action body-li" ><i class="fas fa-robot"></i> 빈도수 기반 추천 </li>
+                                    </ul>
                                 </div>
-                                <div class="col-md-1">
-                                    <div class="collapse menu-collapse" id="multiCollapseExample2">
-                                        <button id="politics" class="btn btn-outline-success btn-criteria"> 2 </button>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="collapse menu-collapse" id="multiCollapseExample3">
-                                        <button id="it" class="btn btn-outline-success btn-criteria"> 3 </button>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="collapse menu-collapse" id="multiCollapseExample4">
-                                        <button id="recommend" class="btn btn-outline-success"><i
-                                                class="fas fa-robot"></i></button>
-                                    </div>
-                                </div>
+                                <!-- /popover -->
                             </div>
                         </span>
                     </div>
                     <div class="col-md-5">
                         <div class="d-flex mb-3 float-end">
                             <input name="keyword" id="keyword-input" class="form-control me-2" type="search"
-                                   placeholder="키워드를 입력해주세요"
+                                   placeholder="검색어를 입력해주세요"
                                    aria-label="Search">
                             <button id="keyword-search" class="btn"><i class="fa fa-search"></i></button>
                         </div>
@@ -77,10 +73,10 @@
         </div>
         <div class="row">
             <div class="col-md-1" style="float: none; margin: 0 auto;">
-                <button id="news-toggle" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                <a id="news-toggle" class="mt-2"  type="button" data-bs-toggle="collapse"
                         data-bs-target=".multi-collapse" aria-expanded="false"
-                        aria-controls="newsCollapse2"><small>10 more..</small>
-                </button>
+                        aria-controls="newsCollapse2"><i class="fas fa-chevron-down" style="color:#0d6efd"></i>
+                </a>
             </div>
         </div>
         <form class="scrapForm" action="/api/v1/posts" method="post">
@@ -90,7 +86,39 @@
             <input type="hidden" name="pubdate">
         </form>
     </div>
-     <script th:inline="javascript">
+
+
+    <script th:inline="javascript">
+        <!-- 툴팁 & 팝오버 설정 -->
+        $(function(){
+            $("[data-bs-toggle=popover]").popover({
+                html: true,
+                trigger : 'focus',
+                content: function() {
+                return $('#popover-content').html();}
+            });
+
+            $('.tooltips').tooltip({
+                animation: true,
+                delay: {show:50, hide:10},
+                trigger: 'hover focus',
+                viewport: { selector: 'body', padding: 0 }
+            });
+        });
+
+        $('.tooltips').on("click", function(){
+            $('.tooltips').tooltip('hide');
+        });
+
+        $('#news-toggle').on("click", function(){
+            if($('#news-toggle i').attr("class") == "fas fa-chevron-up"){
+                $('#news-toggle i').attr("class","fas fa-chevron-down");
+            }else{
+                $('#news-toggle i').attr("class","fas fa-chevron-up");
+            }
+        });
+
+        <!-- 타임리프 에러로 인해 밖으로 뺌. -->
         var userEmail = [[${userEmail}]];
     </script>
     <script src="https://kit.fontawesome.com/71053a34c9.js" crossorigin="anonymous"></script>

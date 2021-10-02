@@ -13,7 +13,6 @@ public class KeywordApiController {
 
     @PostMapping("/api/v1/keywords")
     public Long save(@RequestBody KeywordsSaveRequestDto requestDto) {
-        System.out.println("전송 받은 dto : " + requestDto.toString());
         return keywordsService.save(requestDto);
     }
 

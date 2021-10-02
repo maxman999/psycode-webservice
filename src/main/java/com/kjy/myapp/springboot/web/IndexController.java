@@ -2,6 +2,7 @@ package com.kjy.myapp.springboot.web;
 
 import com.kjy.myapp.springboot.config.auth.LoginUser;
 import com.kjy.myapp.springboot.config.auth.dto.SessionUser;
+import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
 import com.kjy.myapp.springboot.service.posts.PostsService;
 import com.kjy.myapp.springboot.web.dto.PageRequestDto;
 import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
 
     private final PostsService postsService;
+    private final KeywordsRepository keywordsRepository;
 
 
     @GetMapping("/")
@@ -39,6 +41,7 @@ public class IndexController {
     public String postRead(Model model, PageRequestDto pageRequestDTO) {
         model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO));
         model.addAttribute("request", pageRequestDTO);
+
         return "view/posts/posts-read";
     }
 
@@ -66,6 +69,7 @@ public class IndexController {
     @GetMapping("news")
     public String news(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("keywords", keywordsRepository.findByUser_email(user.getEmail()).get());
         return "view/news/read";
     }
 

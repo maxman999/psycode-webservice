@@ -8,3 +8,11 @@
 #posts-input{
     width : 55%
 }
+.page-link{
+    color: black;
+}
+.page-item.active .page-link {
+    color: white;
+    background-color: #708090;
+    border-color: #708090;
+}

@@ -16,12 +16,12 @@ var main = {
             let keyword = $('#keyword-input').val();
             _this.show(keyword);
         })
-        $(".btn-criteria").on('click', function(){
-            let keyword = _this.criteria($(this).attr("id"));
+        $(document).on('click', '.criteria' ,function(){
+            let keyword = $(this).text();
             _this.show(keyword);
             $('#keyword-input').val(keyword);
         })
-        $("#recommend").on('click', function(){
+        $(document).on('click', '#recommend' ,function(){
             _this.getKeywords().then(function(keyword){
                 _this.show(keyword);
                 $("#keyword-input").val(keyword);
@@ -32,7 +32,9 @@ var main = {
     show : function(inputkey) {
         var newsKeyword;
         if(inputkey == null){
-            newsKeyword = "인공지능";
+            let items = $('.criteria').text();
+            let keyArr = (items.split("  "));
+            newsKeyword = keyArr[Math.floor(Math.random() * keyArr.length)]
         }else{
             newsKeyword = inputkey;
         }
@@ -52,7 +54,7 @@ var main = {
        			    let pubdate = new Date(news[i].pubDate).toISOString().substring(0,10);
        				str += "<div><li class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-2 shadow-sm rounded'>";
        				str += "<h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>"+ (i+1) +"<span class='visually-hidden'>news count</span></span></h6>"
-       				str += "<div class='ms-2 me-auto'>";
+       				str += "<div class='ms-2 me-auto' style='width: inherit'>";
        				str += "<div class='title fw-bold mb-1'>" + news[i].title + "</div>";
                     str += "<div class='description div-desc'>" + news[i].description + "</div>";
                     str += "<div class='pubdate' style='display: none'>" + pubdate + "</div>";
@@ -99,17 +101,6 @@ var main = {
         }).fail(function (error){
             alert(JSON.stringify(error));
         });
-    },
-    criteria : function(targetId){
-        let keyword;
-        if(targetId == "it"){
-            keyword = "인공지능";
-        }else if(targetId == "entertainment"){
-            keyword = "연예";
-        }else if(targetId == "politics"){
-            keyword = "정치";
-        }
-        return keyword;
     },
     check : function (target) {
         let title = target.find(".title").text();

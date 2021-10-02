@@ -2,11 +2,11 @@ var main = {
     init : function () {
         let _this = this;
         $(".setting-btn").click(function(){
-            _this.kewordSave();
+            _this.kewordsSave();
         })
 
     },
-    kewordSave : function () {
+    kewordsSave : function () {
         let data = {
             keyword1_user : $('#keyword1').val(),
             keyword2_user : $('#keyword2').val(),

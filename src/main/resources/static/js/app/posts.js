@@ -18,7 +18,7 @@ var main = {
             useremail : $('#useremail').val(),
             description : $('#description').val(),
             pubdate : $('#pubdate').val(),
-            summary : $('#summary').val(),
+            summary : $('#summary').val()
         };
         console.log(data);
         $.ajax({

@@ -26,11 +26,11 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card">
-                    <img th:src="@{/img/pf/resume.jpg}" class="card-img-top" alt="..." style="width:110;height:80">
+                <div class="card github-div">
+                    <img th:src="@{/img/pf/github.png}" class="card-img-top" alt="..." style="background-color:#708090;max-height:225px">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title">Visit Github</h5>
+                        <p class="card-text">깃허브를 방문하시면 진행중인 프로젝트와 작성된 코드들을 더 자세하게 보실 수 있습니다.</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img th:src="@{/img/pf/smhrd/pf1.jpg}" class="d-block w-100" alt="...">
@@ -79,6 +79,11 @@
         </div>
     </div>
 
+    <script>
+        $(".github-div").on("click", function(){
+            window.location = "https://github.com/maxman999";
+        });
+    </script>
 
 </th:block>
 </html>

@@ -7,3 +7,15 @@
     height: 35px;
     margin-bottom : 3px;
 }
+
+#keyword1_user, #keyword2_user, #keyword3_user{
+    border-radius : 30px;
+}
+
+.popover-body{
+    padding : 0 0 0 0;
+}
+
+.custom-col{
+    max-width: 55px;
+}

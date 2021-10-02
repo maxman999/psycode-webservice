@@ -40,3 +40,14 @@ nav {
 .user-info a{
     text-decoration-line : none;
 }
+
+.about-me-div li{
+    margin-bottom : 5px;
+}
+
+.about-psycode-div p{
+    margin-bottom : 5px;
+}
+.about-psycode-div h3{
+    margin-bottom : 7px;
+}
