@@ -34,6 +34,9 @@ var main = {
         if(inputkey == null){
             let items = $('.criteria').text();
             let keyArr = (items.split("  "));
+            if(keyArr[0] == ""){
+                keyArr = ["인공지능","문화","연예","심리"];
+            }
             newsKeyword = keyArr[Math.floor(Math.random() * keyArr.length)]
         }else{
             newsKeyword = inputkey;
