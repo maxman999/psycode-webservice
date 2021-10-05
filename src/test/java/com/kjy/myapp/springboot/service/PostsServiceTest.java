@@ -54,6 +54,7 @@ public class PostsServiceTest {
     @Transactional
     public void testInsert(){
         User user = userRepository.findAll().get(0);
+        System.out.println("user : " + user.getEmail());
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title("title")
                 .description("content")
@@ -68,7 +69,6 @@ public class PostsServiceTest {
         //then
         PostsListResponseDto postsListResponseDto = postList.get(0);
         assertThat(postsListResponseDto.getTitle()).isEqualTo("title");
-        assertThat(postsListResponseDto.getUser().getName()).isEqualTo(user.getName());
     }
 
     @Test

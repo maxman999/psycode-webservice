@@ -74,7 +74,6 @@ public class PostsRepositoryTest {
 
         //when
         List<Posts> postList = postsRepository.findAll();
-
         //then
         Posts posts = postList.get(0);
         assertThat(posts.getTitle()).isEqualTo(title);
