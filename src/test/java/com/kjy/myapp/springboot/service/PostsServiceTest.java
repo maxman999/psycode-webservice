@@ -78,7 +78,7 @@ public class PostsServiceTest {
                 .size(10)
                 .build();
 
-        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDTO);
+        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDTO, "testEmail");
 
         System.out.println("PREV: " + resultDTO.isPrev());
         System.out.println("NEXT: " + resultDTO.isNext());
@@ -99,7 +99,7 @@ public class PostsServiceTest {
                 .type("tc")
                 .keyword("title")
                 .build();
-        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDto);
+        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDto, "testEmail");
 
         System.out.println("PREV: " + resultDTO.isPrev());
         System.out.println("NEXT: " + resultDTO.isNext());

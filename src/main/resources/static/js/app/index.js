@@ -1,7 +1,8 @@
 var main = {
     init : function () {
         let _this = this;
-        $(".setting-btn").click(function(){
+        $("#keyword-setting").submit(function(e){
+            e.preventDefault();
             _this.kewordsSave();
         })
 
@@ -22,6 +23,7 @@ var main = {
             data : JSON.stringify(data)
         }).done(function(){
             alert('수정되었습니다.');
+            $('#settingModal').modal('hide');
         }).fail(function (error){
             alert(JSON.stringify(error));
         });

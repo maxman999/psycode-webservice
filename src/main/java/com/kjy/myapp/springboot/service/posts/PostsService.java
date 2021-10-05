@@ -49,9 +49,9 @@ public class PostsService {
     }
 
     @Transactional(readOnly = true)
-    public PageResultDto<PostsListResponseDto, Posts> getListWithPaging(PageRequestDto requestDTO) {
+    public PageResultDto<PostsListResponseDto, Posts> getListWithPaging(PageRequestDto requestDTO, String email) {
         Pageable pageable = requestDTO.getPageable(Sort.by("id").descending());
-        BooleanBuilder booleanBuilder = getSearch(requestDTO); // 검색 처리
+        BooleanBuilder booleanBuilder = getSearch(requestDTO, email); // 검색 처리
         Page<Posts> result = postsRepository.findAll(booleanBuilder, pageable); // querydsl 적용
         Function<Posts, PostsListResponseDto> fn = (posts -> new PostsListResponseDto(posts));
         return new PageResultDto<>(result, fn);
@@ -64,13 +64,13 @@ public class PostsService {
         postsRepository.delete(posts);
     }
 
-    private BooleanBuilder getSearch(PageRequestDto requestDto) {
+    private BooleanBuilder getSearch(PageRequestDto requestDto, String email) {
         // Querydsl 처리
         String type = requestDto.getType();
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         QPosts qPosts = QPosts.posts;
         String keyword = requestDto.getKeyword();
-        BooleanExpression expression = qPosts.id.gt(0L); // id > 0 조건만 생성
+        BooleanExpression expression = qPosts.user.email.contains(email); // 특정 아이디만 생성
         booleanBuilder.and(expression);
         if (type == null || type.trim().length() == 0) { // 검색 조건이 없는 경우
             return booleanBuilder;

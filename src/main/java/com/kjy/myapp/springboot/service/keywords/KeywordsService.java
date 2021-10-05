@@ -2,11 +2,14 @@ package com.kjy.myapp.springboot.service.keywords;
 
 import com.kjy.myapp.springboot.domain.keywords.Keywords;
 import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
+import com.kjy.myapp.springboot.domain.user.User;
 import com.kjy.myapp.springboot.web.dto.KeywordsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -26,13 +29,18 @@ public class KeywordsService {
         }
     }
 
-//    @Transactional
-//    public Long update(Long id, PostsUpdateRequestDto requestDto) {
-//        Keywords keywords = keywordsRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-//        keywords.update(requestDto.getTitle(), requestDto.getContent());
-//        return id;
-//    }
+    public List getKeywordList(String user_email){
+        Keywords keywords = new Keywords();
+        List<String> keyList = new ArrayList<String>();
+        Optional opt = keywordsRepository.findByUser_email(user_email);
+        if(opt.isPresent()){
+            keywords = (Keywords) opt.get();
+            keyList.add(keywords.getKeyword1_user());
+            keyList.add(keywords.getKeyword2_user());
+            keyList.add(keywords.getKeyword3_user());
+        }
+        return keyList;
+    }
 
 
 }

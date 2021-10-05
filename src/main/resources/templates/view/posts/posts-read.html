@@ -6,10 +6,10 @@
     <link href="/css/news.css" rel="stylesheet"/>
     <link href="/css/posts.css" rel="stylesheet"/>
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top:60px">
             <div class="col-md-10" style="float: none; margin: 0 auto;">
                 <div class='row'>
-                    <div class="col-md-2 custom-col">
+                    <div class="col-md-4 custom-col">
                         <span>
                             <button class="btn btn-outline-secondary tooltips"
                                     type="button"
@@ -25,8 +25,7 @@
                                     th:onclick="|location.href='@{/posts/save}'|"><i class="fas fa-pen-fancy"></i></button>
                         </span>
                     </div>
-
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <form id="posts-search" class="d-flex mb-3 float-end" action="/posts/read?page=1" method="get">
                             <select name="type" id="posts-select" class="form-select form-select-sm"
                                     aria-label="Search Select">
@@ -54,7 +53,7 @@
                             <li class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-2 shadow-sm rounded'>
                                 <h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>[[${post.id}]]<span class='visually-hidden'>news count</span></span></h6>
                                 <div class='ms-2 me-auto' style="width: inherit">
-                                    <div class='title fw-bold mb-1'>[[${post.title}]]</div>
+                                    <div class='title div-title fw-bold mb-1'>[[${post.title}]]</div>
                                     <div class='description div-desc'>[[${post.description}]]
                                     </div>
                                 </div>
@@ -66,7 +65,7 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button th:data-id="${post.id}" class='btn btn-sm btn-outline-secondary news-btn btn-delete'><i class="far fa-trash-alt"></i> delete
+                                        <button th:data-id="${post.id}" class   ='btn btn-sm btn-outline-secondary news-btn btn-delete'><i class="far fa-trash-alt"></i> delete
                                         </button>
                                     </div>
                                 </div>

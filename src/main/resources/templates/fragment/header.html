@@ -49,42 +49,40 @@
         <!-- SettingModal -->
         <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content shadow p-2 mb-5 bg-body rounded">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Keyword Setting</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Interested in ... </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <p>관심사를 설정해주시면 관련된 기사가 우선적으로 출력되며, </p>
+                        <p>더 간편하게 기사를 조회하실 수 있습니다. </p>
+                        <hr>
                         <form id="keyword-setting">
-                            <div class="row mb-4">
-                                <div class="col-md-4">
-                                    <label for="keyword1" class="col-form-label">Keyword1</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input name="keyword1_user" type="text" id="keyword1" class="form-control">
+                            <div class="form-group row">
+                                <label for="keyword1" class="col-sm-2 col-form-label">First</label>
+                                <div class="input-div col-sm-10">
+                                    <input name="keyword1_user" type="text" id="keyword1" class="form-control" placeholder="ex) 인공지능" required>
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <div class="col-md-4">
-                                    <label for="keyword2" class="col-form-label">Keyword2</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input name="keyword2_user" type="text" id="keyword2" class="form-control">
+                            <div class="form-group row">
+                                <label for="keyword2" class="col-sm-2 col-form-label">Second</label>
+                                <div class="input-div col-sm-10">
+                                    <input name="keyword2_user" type="text" id="keyword2" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <div class="col-md-4">
-                                    <label for="keyword3" class="col-form-label">Keyword3</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input name="keyword3_user" type="text" id="keyword3" class="form-control">
+                            <div class="form-group row">
+                                <label for="keyword3" class="col-sm-2 col-form-label">Third</label>
+                                <div class="input-div col-sm-10">
+                                    <input name="keyword3_user" type="text" id="keyword3" class="form-control" required>
                                 </div>
                             </div>
                             <input name="email" type="hidden" id="email" th:value="${session.user.email}">
+                            <hr class="mt-4" >
+                            <div style="text-align: right;">
+                                <button type="submit" class="btn btn-outline-dark setting-btn">저장</button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary setting-btn">Save changes</button>
                     </div>
                 </div>
             </div>

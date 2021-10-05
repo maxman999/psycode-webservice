@@ -2,7 +2,7 @@ package com.kjy.myapp.springboot.web;
 
 import com.kjy.myapp.springboot.config.auth.LoginUser;
 import com.kjy.myapp.springboot.config.auth.dto.SessionUser;
-import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
+import com.kjy.myapp.springboot.service.keywords.KeywordsService;
 import com.kjy.myapp.springboot.service.posts.PostsService;
 import com.kjy.myapp.springboot.web.dto.PageRequestDto;
 import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IndexController {
 
     private final PostsService postsService;
-    private final KeywordsRepository keywordsRepository;
+    private final KeywordsService keywordsService;
 
 
     @GetMapping("/")
@@ -38,19 +38,20 @@ public class IndexController {
 
 
     @GetMapping("posts/read")
-    public String postRead(Model model, PageRequestDto pageRequestDTO) {
-        model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO));
+    public String postRead(Model model, PageRequestDto pageRequestDTO, @LoginUser SessionUser user) {
+        model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO, user.getEmail()));
         model.addAttribute("request", pageRequestDTO);
-
         return "view/posts/posts-read";
     }
 
+    // custom news 스크랩을 위한 위한 url
     @GetMapping("posts/save")
     public String postsSaveGet(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
         return "view/posts/posts-save";
     }
 
+    // api를 통한 news 스크랩을 위한 url
     @PostMapping("posts/save")
     public String postsSavePost(Model model, @LoginUser SessionUser user, ScrapRequestDto scrapRequestDto) {
         model.addAttribute("userEmail", user.getEmail());
@@ -69,7 +70,8 @@ public class IndexController {
     @GetMapping("news")
     public String news(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
-        model.addAttribute("keywords", keywordsRepository.findByUser_email(user.getEmail()).get());
+        model.addAttribute("keywords", keywordsService.getKeywordList(user.getEmail()));
+        System.out.println(keywordsService.getKeywordList(user.getEmail()));
         return "view/news/read";
     }
 

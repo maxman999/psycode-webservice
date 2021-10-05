@@ -3,36 +3,33 @@
       layout:decorate="~{layout/basic}">
 
 <th:block layout:fragment="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-4">
-                    <form>
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="originallink">url</label>
-                            <input type="text" class="form-control" id="originallink" placeholder="뉴스 원문 링크를 입력해주세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="useremail"> 작성자 </label>
-                            <input type="text" class="form-control" id="useremail" th:value="${userEmail}" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="description"> 요약 </label>
-                            <input type="text" class="form-control" id="description" placeholder="뉴스 요약을 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="summary"> 내용 </label>
-                            <textarea class="form-control" id="summary" placeholder="내용을 입력하세요"></textarea>
-                        </div>
-                        <input type="date" class="form-control" id="pubdate">
-                    </form>
-                    <a href="/" role="button" class="btn btn-secondary">취소</a>
-                    <button type="button" class="btn btn-primary" id="btn-save">등록</button>
-                </div>
+    <link href="/css/posts.css" rel="stylesheet"/>
+
+    <div class="row mt-5 scrap-div">
+        <div class="col-md-12 mt-5">
+            <div class="col-md-5 shadow p-3 mb-5 bg-body rounded" style="float: none; margin: 0 auto;">
+                <h3> NEWS SCRAP </h3>
+                <hr>
+                <form id = "posts-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" id="title" placeholder="제목을 입력해주세요" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" id="originallink" placeholder="기사의 원문 링크를 입력해주세요" required>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" id="description" style="height: 200px;" placeholder="기사의 요약정보를 입력해주세요" required></textarea>
+                    </div>
+                    <hr>
+                    <input type="hidden" class="form-control" id="pubdate" th:value="${#calendars.format(#calendars.createNow(),'yyyy-MM-dd')}">
+                    <input type="hidden" class="form-control" id="useremail" th:value="${userEmail}" readonly>
+                    <input type="hidden" class="form-control" id="summary">
+                    <div style="text-align: right;">
+                        <a href="/posts/read" role="button" class="btn btn-outline-secondary">취소</a>
+                        <button type="submit" class="btn btn-outline-success" id="btn-save">등록</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -61,3 +61,22 @@ nav {
 .feedback-div p{
     font-size : 15px;
 }
+#settingModal .modal-content{
+    width: 450px;
+}
+#settingModal .form-group{
+    margin: 15px 0 15px 0;
+}
+#settingModal .input-div{
+    padding-left: 35px;
+}
+#settingModal p{
+    font-size: small;
+    color: #708090;
+    text-align: center;
+    margin: 0;
+}
+
+.setting-btn{
+    color: #708090;
+}

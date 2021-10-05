@@ -48,7 +48,7 @@ public class NewsController {
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL, requestHeaders);
-
+        System.out.println("responseBody : " + responseBody);
         return responseBody;
     }
 

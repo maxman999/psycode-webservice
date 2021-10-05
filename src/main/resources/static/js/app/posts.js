@@ -1,7 +1,8 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#btn-save').on('click', function(){
+        $('#posts-form').submit(function(e){
+            e.preventDefault();
             _this.save();
         });
         $('#btn-update').on('click', function(){
