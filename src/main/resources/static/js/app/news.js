@@ -12,10 +12,17 @@ var main = {
                 alert("이미 등록된 기사입니다.");
             }
         });
+
         $("#keyword-search").on('click', function(){
             let keyword = $('#keyword-input').val();
-            _this.show(keyword);
         })
+        $("#keyword-input").on("keyup",function(key){
+            if(key.keyCode==13) {
+                let keyword = $('#keyword-input').val();
+                _this.show(keyword);
+            }
+        });
+
         $(document).on('click', '.criteria' ,function(){
             let keyword = $(this).text();
             _this.show(keyword);
@@ -68,7 +75,7 @@ var main = {
                         let pubdate = new Date(news[i].pubDate).toISOString().substring(0,10);
                         str += "<div><li class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-2 shadow-sm rounded'>";
                         str += "<h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>"+ (i+1) +"<span class='visually-hidden'>news count</span></span></h6>"
-                        str += "<div class='ms-2 me-auto' style='width: inherit'>";
+                        str += "<div class='ms-2 me-auto' style='width: inherit; word-break: break-all;'>";
                         str += "<div class='title fw-bold mb-1'>" + news[i].title + "</div>";
                         str += "<div class='description div-desc'>" + news[i].description + "</div>";
                         str += "<div class='pubdate' style='display: none'>" + pubdate + "</div>";
@@ -143,7 +150,7 @@ var main = {
         return new Promise(function(resolve){
             $.ajax({
                 type : 'GET',
-                url : 'http://ec2-15-165-82-52.ap-northeast-2.compute.amazonaws.com:5000/getKeyword',
+                url : 'http://psy-code.com:5000/getKeyword',
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
             }).done(function(result){

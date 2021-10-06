@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic}">
+
+<th:block layout:fragment="content">
+    <link href="/css/errors.css" rel="stylesheet"/>
+
+    <div class="container">
+        <div class="row">
+            <div id="error-div" class ="col-md-10" style="float: none; margin: 0 auto;">
+                <h1 class="text-center"> Sorry, this page isn't available</h1>
+                <p class="text-center"> 현재 페이지가 존재하지 않거나, 현재 이용할 수 없습니다. </p>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

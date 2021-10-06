@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lagn="en" xmlns:th="http://www.thymeleaf.org">
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
 <th:block th:fragment="headerFragment">
     <!-- Navbar -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom mb-5">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid nav-div">
             <a class="navbar-brand" href="/">PsyCode</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -29,7 +29,7 @@
                     <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" th:src="@{${session.user.picture}}" width="45" height="45"><i class="fas fa-long-arrow-alt-down setting-icon"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end user-info">
+                    <div class="dropdown-menu user-info">
                         <ul class="list-group shadow-lg">
                             <li class="list-group-item list-group-item-secondary header-li">[[${session.user.email}]]</li>
                             <li class="list-group-item list-group-item-action body-li" data-bs-toggle="modal" data-bs-target="#settingModal"><i class="fas fa-cog"></i> Setting </li>

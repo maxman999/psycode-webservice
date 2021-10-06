@@ -1,10 +1,9 @@
 .login-form {
-		width: 600px;
-    	margin: 170px auto;
+		max-width: 600px;
+    	margin: 12em auto;
 	}
     .login-form form {
-        height: 430px;
-    	margin-bottom: 15px;
+        max-height: 430px;
         background:  white;
         box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
         padding: 10px 0 40px 0;
@@ -50,6 +49,11 @@
         min-width: 15px;
         border: white;
 	}
+	.social-btn p{
+	    margin: 0 0 0 1em;
+        font-size: 0.9em;
+	}
+
 	.input-group-addon .fa{
 		font-size: 18px;
 	}

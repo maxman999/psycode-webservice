@@ -1,75 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic}">
 
 <th:block layout:fragment="content">
     <link href="/css/news.css" rel="stylesheet"/>
     <link href="/css/posts.css" rel="stylesheet"/>
     <div class="container">
-        <div class="row" style="margin-top:60px">
-            <div class="col-md-10" style="float: none; margin: 0 auto;">
-                <div class='row'>
-                    <div class="col-md-4 custom-col">
-                        <span>
-                            <button class="btn btn-outline-secondary tooltips"
-                                    type="button"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="기사 보기"
-                                    th:onclick="|location.href='@{/news}'|"><i class="far fa-newspaper"></i></button>
-                        </span>
-                    </div>
-                    <div class="col">
-                        <span>
-                            <button class="btn btn-outline-secondary tooltips"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="글쓰기"
-                                    type="button"
-                                    th:onclick="|location.href='@{/posts/save}'|"><i class="fas fa-pen-fancy"></i></button>
-                        </span>
-                    </div>
-                    <div class="col-md-4">
-                        <form id="posts-search" class="d-flex mb-3 float-end" action="/posts/read?page=1" method="get">
-                            <select name="type" id="posts-select" class="form-select form-select-sm"
-                                    aria-label="Search Select">
-                                <option value="t" selected>제목</option>
-                                <option value="c">내용</option>
-                                <option value="tc">제목+내용</option>
-<!--                                <option value="a">작성자</option>-->
-                            </select>
-
-                            <input name="keyword" id="posts-input" class="form-control me-2" type="search"
-                                   placeholder="Search"
-                                   aria-label="Search">
-                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-md-10 mt-3 mb-3" style="float: none; margin: 0 auto;">
+                <button class="btn btn-outline-secondary tooltips mt-2"
+                        type="button"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="기사 보기"
+                        th:onclick="|location.href='@{/news}'|"><i class="far fa-newspaper"></i></button>
+                <button class="btn btn-outline-secondary tooltips mt-2"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="글쓰기"
+                        type="button"
+                        th:onclick="|location.href='@{/posts/save}'|"><i class="fas fa-pen-fancy"></i></button>
+                <form id="posts-search" class="d-flex mb-3 float-end mt-2" action="/posts/read?page=1" method="get">
+                    <select name="type" id="posts-select" class="form-select form-select-sm"
+                            aria-label="Search Select">
+                        <option value="t" selected>제목</option>
+                        <option value="c">내용</option>
+                        <option value="tc">제목+내용</option>
+                        <!--                                <option value="a">작성자</option>-->
+                    </select>
+                    <input name="keyword" id="posts-input" class="form-control me-2" type="search"
+                           placeholder="Search"
+                           aria-label="Search">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
         </div>
         <!-- 목록 출력 영역 -->
+        <!-- 스크랩한 기사가 없는 경우 -->
+        <th:block th:if="${result.totalPage==0}">
+            <div class="warning-wrapper">
+                <div class="shadow p-3 mb-3 bg-body rounded" style="height:510px;">
+                    <div class="row mt-5 div-warning">
+                        <div class="col mt-5">
+                            <h1 class="text-center"><i class="fas fa-exclamation-triangle m-3"></i> 불편을 드려 죄송합니다. </h1>
+                            <h4 class="text-center mt-4"> <b>기사를 불러올 수 없습니다. </b></h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5" style="float: none; margin: 0 auto;">
+                                <ol class="mt-5">
+                                    <li> 스크랩 한 기사가 없다면, 먼저 기사를 등록 해주시기 바랍니다. </li>
+                                    <li> 입력하신 검색어가 정확한지 확인해주세요. </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+        <!-- /스크랩한 기사가 없는 경우 -->
+
         <div class=row>
             <div class="col-md-10" style="float: none; margin: 0 auto;">
                 <div class="row">
-                    <div th:each="post : ${result.dtoList}" id="ol-news" class="list-group list-group-numbered">
-                        <div class="col">
-                            <li class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-2 shadow-sm rounded'>
-                                <h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>[[${post.id}]]<span class='visually-hidden'>news count</span></span></h6>
-                                <div class='ms-2 me-auto' style="width: inherit">
-                                    <div class='title div-title fw-bold mb-1'>[[${post.title}]]</div>
-                                    <div class='description div-desc'>[[${post.description}]]
+                    <div class="col">
+                        <div id="ol-news" class="list-group ol-news">
+                            <div th:each="post : ${result.dtoList}">
+                                <li class='list-group-item align-items-start list-group-item-action d-flex mb-2 shadow-sm rounded'>
+                                    <h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>[[${post.id}]]<span class='visually-hidden'>news count</span></span></h6>
+                                    <div class='ms-2 me-auto' style='width:inherit; word-break: break-all;'>
+                                        <div class='title fw-bold mb-1'>[[${post.title}]]</div>
+                                        <div class='description div-desc'>[[${post.description}]]</div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div>
-                                        <button class='btn btn-sm btn-outline-secondary news-btn'
-                                                th:onclick="'location.href=\''+@{${post.originallink}}+'\''"><i
-                                                class='far fa-eye'></i> view
-                                        </button>
+                                    <div class="col align-self-center">
+                                        <div>
+                                            <button class='btn btn-sm btn-outline-secondary news-btn'
+                                                    th:onclick="'location.href=\''+@{${post.originallink}}+'\''"><i
+                                                    class='far fa-eye'></i> view
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button th:data-id="${post.id}" class   ='btn btn-sm btn-outline-secondary news-btn btn-delete'><i class="far fa-trash-alt"></i> delete
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <button th:data-id="${post.id}" class   ='btn btn-sm btn-outline-secondary news-btn btn-delete'><i class="far fa-trash-alt"></i> delete
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,10 @@ var main = {
             _this.update();
         });
         $('.btn-delete').on('click', function(){
-            _this.delete($(this));
+            var result = confirm("기사를 삭제하시겠습니까?");
+            if(result){
+                _this.delete($(this));
+            }
         });
     },
     save : function () {
@@ -62,7 +65,7 @@ var main = {
             dataType : 'json',
             contentType : 'application/json; charset=utf-8'
         }).done(function(){
-            alert('글이 삭제되었습니다.');
+            alert('삭제되었습니다.');
             window.location.reload();
         }).fail(function(error){
             alert(JSON.stringify(error));

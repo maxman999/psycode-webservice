@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic}">
 
 <th:block layout:fragment="content">
@@ -46,27 +46,29 @@
         </div>
         <!-- about 영역 -->
         <!-- 댓글 영역  -->
-        <div class = "row w-75" style="float: none; margin: 0 auto;" >
-            <!-- 라이브리 시티 설치 코드 -->
-            <div class="feedback-div">
-                <p><b> Feedback & Report &nbsp;</b><i class="fas fa-wrench"></i> </p>
+        <div class = "row">
+            <div class="col-md-9" style="float: none; margin: 0 auto;">
+                <!-- 라이브리 시티 설치 코드 -->
+                <div class="feedback-div">
+                    <p><b> Feedback & Report &nbsp;</b><i class="fas fa-wrench"></i> </p>
+                </div>
+                <div id="lv-container" data-id="city" data-uid="MTAyMC81NDQwNS8zMDg3Ng==">
+                    <script type="text/javascript">
+                        window.livereOptions = {
+                            refer : 'www.localhost.com/'
+                        };
+                       (function(d, s) {
+                           var j, e = d.getElementsByTagName(s)[0];
+                           if (typeof LivereTower === 'function') { return; }
+                           j = d.createElement(s);
+                           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                           j.async = true;
+                           e.parentNode.insertBefore(j, e);
+                       })(document, 'script');
+                    </script>
+                </div>
+                <!-- 시티 설치 코드 끝 -->
             </div>
-            <div id="lv-container" data-id="city" data-uid="MTAyMC81NDQwNS8zMDg3Ng==">
-                <script type="text/javascript">
-                    window.livereOptions = {
-                        refer : 'www.localhost.com/'
-                    };
-                   (function(d, s) {
-                       var j, e = d.getElementsByTagName(s)[0];
-                       if (typeof LivereTower === 'function') { return; }
-                       j = d.createElement(s);
-                       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                       j.async = true;
-                       e.parentNode.insertBefore(j, e);
-                   })(document, 'script');
-                </script>
-            </div>
-            <!-- 시티 설치 코드 끝 -->
         </div>
     </div>
 </th:block>

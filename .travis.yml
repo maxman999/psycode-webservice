@@ -10,7 +10,7 @@ cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
-script: "./gradlew clean test build"
+script: "./gradlew clean build -x test"
 
 # codedeploy로 배포하는 경우
 before_deploy:

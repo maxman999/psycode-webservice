@@ -1,25 +1,11 @@
-.div-title {
-    width : 50%;
-    max-height : 20px;
-    text-overflow: ellipsis;
-    overflow:hidden;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* 라인수 */
-    -webkit-box-orient: vertical;
-    word-wrap:break-word;
-    line-height: 1.2em;
-    height: 3.6em;
-}
-
 .div-desc {
-    width : 90%;
-    max-height : 40px;
+    max-width : 90%;
+    max-height : 55px;
     text-overflow: ellipsis;
     overflow:hidden;
 
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* 라인수 */
+    -webkit-line-clamp: 3; /* 라인수 */
     -webkit-box-orient: vertical;
     word-wrap:break-word;
     line-height: 1.2em;
@@ -28,8 +14,8 @@
 
 
 .news-btn{
-    width: 80px;
-    height: 35px;
+    width: 6em;
+    height: 2.5em;
     margin-bottom : 3px;
 }
 
@@ -39,10 +25,6 @@
 
 .popover-body{
     padding : 0 0 0 0;
-}
-
-.custom-col{
-    max-width: 55px;
 }
 
 .div-warning i{
@@ -56,12 +38,11 @@
     color: #708090;
 
 }
-.div-warning ul{
+.div-warning ol{
     color: #708090;
 
 }
 .div-warning li{
     margin: 5px 0 5px 0;
 }
-
 
