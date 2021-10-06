@@ -1,19 +1,28 @@
 var main = {
     init : function () {
         var _this = this;
+
         $('#posts-form').submit(function(e){
-            e.preventDefault();
-            _this.save();
+                    e.preventDefault();
+                    _this.save();
         });
         $('#btn-update').on('click', function(){
             _this.update();
         });
-        $('.btn-delete').on('click', function(){
-            var result = confirm("기사를 삭제하시겠습니까?");
-            if(result){
-                _this.delete($(this));
+
+        $(".list-wrapper-div").click(handler);
+        function handler(event){
+            let ele = $(event.target);
+            if(ele.is("div")){
+                let url = $(this).find(".originallink").text();
+                location.href=url;
+            }else if(ele.is("button") || ele.is("i")){
+                var result = confirm("기사를 삭제하시겠습니까?");
+                    if(result){
+                        _this.delete($(this));
+                    }
             }
-        });
+        }
     },
     save : function () {
         var data = {
@@ -58,7 +67,9 @@ var main = {
         });
     },
     delete : function (target){
+        console.log("target : " + target);
         var id = target.data(id).id;
+        console.log("id : " + id)
         $.ajax({
             type : 'DELETE',
             url : '/api/v1/posts/' + id,

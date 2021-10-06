@@ -8,6 +8,7 @@ import com.kjy.myapp.springboot.web.dto.PageRequestDto;
 import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
 import com.kjy.myapp.springboot.web.dto.ScrapRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,4 +80,14 @@ public class IndexController {
     public String portfolio() {
         return "view/portfolio/read";
     }
+
+    @GetMapping("portfolio/pdf")
+    public String pdfRead(@RequestParam String target, Model model) {
+        System.out.println("target : " +  target);
+        model.addAttribute("target", target);
+        return "view/portfolio/pdf-read";
+    }
+
+
+
 }

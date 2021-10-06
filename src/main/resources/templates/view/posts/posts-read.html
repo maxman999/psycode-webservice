@@ -8,15 +8,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 mt-3 mb-3" style="float: none; margin: 0 auto;">
-                <button class="btn btn-outline-secondary tooltips mt-2"
+                <button class="btn btn-outline-secondary tooltips mt-1"
                         type="button"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="기사 보기"
                         th:onclick="|location.href='@{/news}'|"><i class="far fa-newspaper"></i></button>
-                <button class="btn btn-outline-secondary tooltips mt-2"
+                <button class="btn btn-outline-secondary tooltips mt-1"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="글쓰기"
                         type="button"
                         th:onclick="|location.href='@{/posts/save}'|"><i class="fas fa-pen-fancy"></i></button>
-                <form id="posts-search" class="d-flex mb-3 float-end mt-2" action="/posts/read?page=1" method="get">
+                <form id="posts-search" class="d-flex mb-3 float-end mt-1" action="/posts/read?page=1" method="get">
                     <select name="type" id="posts-select" class="form-select form-select-sm"
                             aria-label="Search Select">
                         <option value="t" selected>제목</option>
@@ -34,24 +34,28 @@
         <!-- 목록 출력 영역 -->
         <!-- 스크랩한 기사가 없는 경우 -->
         <th:block th:if="${result.totalPage==0}">
-            <div class="warning-wrapper">
-                <div class="shadow p-3 mb-3 bg-body rounded" style="height:510px;">
-                    <div class="row mt-5 div-warning">
-                        <div class="col mt-5">
-                            <h1 class="text-center"><i class="fas fa-exclamation-triangle m-3"></i> 불편을 드려 죄송합니다. </h1>
-                            <h4 class="text-center mt-4"> <b>기사를 불러올 수 없습니다. </b></h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5" style="float: none; margin: 0 auto;">
-                                <ol class="mt-5">
-                                    <li> 스크랩 한 기사가 없다면, 먼저 기사를 등록 해주시기 바랍니다. </li>
-                                    <li> 입력하신 검색어가 정확한지 확인해주세요. </li>
-                                </ol>
+        <div class="row">
+            <div class="col-md-10 mt-3 mb-3" style="float: none; margin: 0 auto;">
+                <div class="warning-wrapper">
+                    <div class="shadow p-3 mb-3 bg-body rounded" style="height:510px;">
+                        <div class="row mt-5 div-warning">
+                            <div class="col mt-5">
+                                <h1 class="text-center"><i class="fas fa-exclamation-triangle m-3"></i> 불편을 드려 죄송합니다. </h1>
+                                <h4 class="text-center mt-4"> <b>기사를 불러올 수 없습니다. </b></h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="float: none; margin: 0 auto;">
+                                    <ol class="mt-5">
+                                        <li> 스크랩 한 기사가 없다면, 먼저 기사를 등록 해주시기 바랍니다. </li>
+                                        <li> 입력하신 검색어가 정확한지 확인해주세요. </li>
+                                    </ol>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </th:block>
         <!-- /스크랩한 기사가 없는 경우 -->
 
@@ -60,24 +64,16 @@
                 <div class="row">
                     <div class="col">
                         <div id="ol-news" class="list-group ol-news">
-                            <div th:each="post : ${result.dtoList}">
+                            <div  th:each="post : ${result.dtoList}" class="list-wrapper-div" th:data-id="${post.id}">
                                 <li class='list-group-item align-items-start list-group-item-action d-flex mb-2 shadow-sm rounded'>
                                     <h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>[[${post.id}]]<span class='visually-hidden'>news count</span></span></h6>
                                     <div class='ms-2 me-auto' style='width:inherit; word-break: break-all;'>
-                                        <div class='title fw-bold mb-1'>[[${post.title}]]</div>
+                                        <div class='title fw-bold mb-2'>[[${post.title}]]</div>
                                         <div class='description div-desc'>[[${post.description}]]</div>
+                                        <div class='originallink d-none'>[[${post.originallink}]]</div>
                                     </div>
-                                    <div class="col align-self-center">
-                                        <div>
-                                            <button class='btn btn-sm btn-outline-secondary news-btn'
-                                                    th:onclick="'location.href=\''+@{${post.originallink}}+'\''"><i
-                                                    class='far fa-eye'></i> view
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button th:data-id="${post.id}" class   ='btn btn-sm btn-outline-secondary news-btn btn-delete'><i class="far fa-trash-alt"></i> delete
-                                            </button>
-                                        </div>
+                                    <div class='col align-self-center'>
+                                        <button class ='btn btn-sm btn-outline-danger news-btn btn-delete'><i class="far fa-trash-alt"></i></button>
                                     </div>
                                 </li>
                             </div>

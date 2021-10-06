@@ -1,62 +1,68 @@
 .login-form {
-		max-width: 600px;
-    	margin: 12em auto;
-	}
-    .login-form form {
-        max-height: 430px;
-        background:  white;
-        box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
-        padding: 10px 0 40px 0;
-    }
-    .login-form h1 {
-        font-size: 60px;
+    padding : 10px;
+    max-width: 600px;
+    margin: 12em auto;
+}
+.login-form form {
+    max-height: 430px;
+    background:  white;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
+    padding: 10px 0 40px 0;
+}
+.login-form h1 {
+    font-size: 60px;
 
-    }
-    .login-form .hint-text {
-		color: #777;
-		text-align: center;
-    }
-    .form-control, .btn {
-        min-height: 38px;
-        border: 1px solid black;
-        border-radius: 2px;
-    }
-    .login-btn {
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .or-seperator {
-        margin-top: 15px;
-        text-align: center;
-        border-top: 1px solid #ccc;
-    }
-    .or-seperator i {
-        padding: 0 10px;
-        background: white;
-        position: relative;
-        top: -11px;
-        z-index: 1;
-    }
-    .social-btn .btn {
-        margin: 5px 0;
-        font-size: 15px;
-        text-align: left;
-        line-height: 24px;
-    }
-	.social-btn .btn i {
-		float: left;
-		margin: 4px 15px  0 5px;
-        min-width: 15px;
-        border: white;
-	}
-	.social-btn p{
-	    margin: 0 0 0 1em;
-        font-size: 0.9em;
-	}
+}
+.login-form .hint-text {
+    color: #777;
+    text-align: center;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+.login-btn {
+    font-size: 15px;
+    font-weight: bold;
+}
+.or-seperator {
+    margin-top: 15px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.or-seperator i {
+    padding: 0 10px;
+    background: white;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}
+.social-btn .btn {
+    margin: 5px 0;
+    font-size: 15px;
+    text-align: left;
+    line-height: 24px;
+}
+.social-btn .btn i {
+    float: left;
+    margin: 4px 15px  0 5px;
+    min-width: 15px;
+    border: white;
+}
+.social-btn p{
+    margin: 0 0 0 1em;
+    font-size: 0.9em;
+}
 
-	.input-group-addon .fa{
-		font-size: 18px;
-	}
-    hr{
-        width: 60%;
-    }
+.social-btn a{
+    min-width : 180px;
+
+}
+
+.input-group-addon .fa{
+    font-size: 18px;
+}
+hr{
+    width: 60%;
+}

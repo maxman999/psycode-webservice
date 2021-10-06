@@ -1,22 +1,20 @@
 .div-desc {
-    max-width : 90%;
+    max-width : 95%;
     max-height : 55px;
     text-overflow: ellipsis;
     overflow:hidden;
 
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* 라인수 */
+    -webkit-line-clamp: 2; /* 라인수 */
     -webkit-box-orient: vertical;
     word-wrap:break-word;
-    line-height: 1.2em;
-    height: 3.6em;
+    line-height: 24px;
+    height: 52px;
 }
 
 
 .news-btn{
-    width: 6em;
-    height: 2.5em;
-    margin-bottom : 3px;
+
 }
 
 #keyword1_user, #keyword2_user, #keyword3_user{

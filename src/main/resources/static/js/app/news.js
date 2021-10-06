@@ -3,15 +3,22 @@ var main = {
         let _this = this;
         _this.show();
 
-        $('.ol-news').on('click','.btn-scrap',function(){
-            let targetDiv = $(this).parent().parent().prev();
-            let isDuple = _this.check(targetDiv);
-            if(isDuple === false){
-                _this.save(targetDiv);
-            }else if(isDuple === true){
-                alert("이미 등록된 기사입니다.");
+        $('.ol-news').on('click','.list-wrapper-div',handler);
+        function handler(event){
+            let ele = $(event.target);
+            if(ele.is("div")){
+                let url = $(this).find(".originallink").text();
+                location.href=url;
+            }else if(ele.is("button") || ele.is("i")){
+                let isDuple = _this.check($(this));
+                if(isDuple === false){
+                    _this.save($(this));
+                }else if(isDuple === true){
+                    alert("이미 등록된 기사입니다.");
+                }
             }
-        });
+        }
+
 
         $("#keyword-search").on('click', function(){
             let keyword = $('#keyword-input').val();
@@ -73,7 +80,7 @@ var main = {
                     let strArr = new Array();
                     for (var i = 0; i < news.length; i++) {
                         let pubdate = new Date(news[i].pubDate).toISOString().substring(0,10);
-                        str += "<div><li class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-2 shadow-sm rounded'>";
+                        str += "<div class='list-wrapper-div'><li class='list-group-item d-flex justify-content-between align-items-start list-group-item-action mb-2 shadow-sm rounded'>";
                         str += "<h6><span class='position-absolute top-5 start-0 translate-middle badge rounded-pill bg-dark'>"+ (i+1) +"<span class='visually-hidden'>news count</span></span></h6>"
                         str += "<div class='ms-2 me-auto' style='width: inherit; word-break: break-all;'>";
                         str += "<div class='title fw-bold mb-1'>" + news[i].title + "</div>";
@@ -81,8 +88,7 @@ var main = {
                         str += "<div class='pubdate' style='display: none'>" + pubdate + "</div>";
                         str += "<div class='originallink' style='display: none'>"+news[i].originallink+"</div>"
                         str += "</div><div class='col align-self-center'>";
-                        str += "<div><button class='btn btn-sm btn-outline-secondary news-btn' onclick=location.href='" + news[i].originallink + "'><i class='far fa-eye'></i> view </button></div>";
-                        str += "<div><button class='btn btn-sm btn-outline-secondary news-btn btn-scrap'><i class='fas fa-pencil-alt'></i> scrap </button></div>";
+                        str += "<div><button class='btn btn-sm btn-outline-secondary news-btn btn-scrap'><i class='fas fa-pencil-alt'></i></button></div>";
                         str += "</li></div></div>";
                         if(i%5==4){
                             strArr.push(str);

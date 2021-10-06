@@ -13,3 +13,8 @@
     background-color: #708090;
     border-color: #708090;
 }
+
+.btn-delete{
+    border-color :#708090;
+    color : red;
+}
