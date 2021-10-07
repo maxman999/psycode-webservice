@@ -162,7 +162,7 @@ var main = {
         return new Promise(function(resolve,reject){
             $.ajax({
                 type : 'GET',
-                url : 'http://psy-code.com:5000/getKeyword',
+                url : 'http://psy-code.com:5000/getKeyword?user_email='+userEmail, // userEmail은 thymeleaf를 이용해 선언한 값 read.html에서 선언하였다..
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
             }).done((result) => { resolve(result.keyword); })
