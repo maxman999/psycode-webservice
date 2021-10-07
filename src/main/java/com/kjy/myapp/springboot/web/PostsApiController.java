@@ -37,7 +37,8 @@ public class PostsApiController {
     @PostMapping("/api/v1/posts/check")
     public boolean check(@RequestBody PostsSaveRequestDto requestDto){
         String title = requestDto.getTitle();
-        return postsService.check(title);
+        String user_email = requestDto.getUseremail();
+        return postsService.check(title,user_email);
     }
 
 }

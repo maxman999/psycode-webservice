@@ -22,6 +22,7 @@ var main = {
 
         $("#keyword-search").on('click', function(){
             let keyword = $('#keyword-input').val();
+            _this.show(keyword);
         })
         $("#keyword-input").on("keyup",function(key){
             if(key.keyCode==13) {
@@ -35,12 +36,16 @@ var main = {
             _this.show(keyword);
             $('#keyword-input').val(keyword);
         })
+
         $(document).on('click', '#recommend' ,function(){
-            _this.getKeywords().then(function(keyword){
-                _this.show(keyword);
-                $("#keyword-input").val(keyword);
-            });
+            _this.getKeywords()
+                .then(function(keyword){
+                    _this.show(keyword);
+                    $("#keyword-input").val(keyword);})
+                .catch(error => {console.log(error)})
+                .finally(()=>{$('#loading-spinner').css("display","none");});
         })
+
         $(document).on('click', '.no-criteria' ,function(){
             $('#settingModal').modal('show');
         })
@@ -68,7 +73,7 @@ var main = {
        		contentType : "application/json; charset=utf-8",
        		data : keyObj,
        		success : function(result) {
-       		    let count = JSON.parse(result).total;
+       		    let count = JSON.parse(result).display;
                 if(count == 0){
                     if($("#ol-news-main").css("display") != "none"){
                         $("#ol-news-main, .ol-news, .more-btn").css("display","none");
@@ -107,7 +112,7 @@ var main = {
 
        		},
        		error : function(e) {
-       			alert("통신 실패");
+       			alert("요청을 처리할 수 없습니다.");
        		}
        	})
     },
@@ -129,7 +134,7 @@ var main = {
             alert('글이 등록되었습니다.');
             // window.location.href = '/posts/read?page=1';
         }).fail(function (error){
-            alert(JSON.stringify(error));
+            alert("요청을 처리할 수 없습니다.");
         });
     },
     check : function (target) {
@@ -148,21 +153,21 @@ var main = {
         }).done(function(result){
             isDuple =  result;
         }).fail(function (error){
-            alert(JSON.stringify(error));
+            alert("요청을 처리할 수 없습니다.");
         });
         return isDuple;
     },
     getKeywords : function(){
-        return new Promise(function(resolve){
+        $('#loading-div').css("display","block");
+        return new Promise(function(resolve,reject){
             $.ajax({
                 type : 'GET',
                 url : 'http://psy-code.com:5000/getKeyword',
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
-            }).done(function(result){
-                resolve(result.keyword);
-            }).fail(function (error){
-                alert(JSON.stringify(error));
+            }).done((result) => { resolve(result.keyword); })
+            .fail((error) => { alert("요청을 처리할 수 없습니다."); })
+            .always(() => { $('#loading-div').css("display","none");
             });
         })
     }

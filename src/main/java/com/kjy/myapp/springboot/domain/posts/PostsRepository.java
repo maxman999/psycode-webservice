@@ -14,8 +14,9 @@ public interface PostsRepository extends JpaRepository<Posts, Long>, QuerydslPre
     @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
     List<Posts> findAllDESC();
 
-    @Query("SELECT p FROM Posts p WHERE p.title = :title")
-    Posts check(@Param("title") String title);
+    @Query(value = "SELECT * FROM posts WHERE title = :title AND user_email = :user_email", nativeQuery = true)
+    Posts check(@Param("title") String title,
+                @Param("user_email") String user_email);
 
     Optional<User> findByUser_email(String email);
 }

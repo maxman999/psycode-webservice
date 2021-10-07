@@ -25,10 +25,13 @@ public class OAuthAttributes {
         this.picture = picture;
     }
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
+        System.out.println(registrationId);
         if("naver".equals(registrationId)){
             return ofNaver("id", attributes);
         }else if("github".equals(registrationId)){
             return ofGithub(userNameAttributeName, attributes);
+        }else if ("kakao".equals(registrationId)){
+            return ofKakao("id",attributes);
         }
         return ofGoogle(userNameAttributeName, attributes);
     }
@@ -63,6 +66,19 @@ public class OAuthAttributes {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
+
+    private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String,Object> attributes){
+        Map<String, Object> profile = (Map<String, Object>) attributes.get("properties");
+        Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
+        return OAuthAttributes.builder()
+                .name((String)profile.get("nickname"))
+                .email((String)kakao_account.get("email"))
+                .picture((String)profile.get("profile_image"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
 
     public User toEntity(){
         return User.builder()

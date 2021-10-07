@@ -70,7 +70,7 @@ public class PostsService {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         QPosts qPosts = QPosts.posts;
         String keyword = requestDto.getKeyword();
-        BooleanExpression expression = qPosts.user.email.contains(email); // 특정 아이디만 생성
+        BooleanExpression expression = qPosts.user.email.contains(email); // 특정 아이디의 스크랩만 조회
         booleanBuilder.and(expression);
         if (type == null || type.trim().length() == 0) { // 검색 조건이 없는 경우
             return booleanBuilder;
@@ -91,8 +91,8 @@ public class PostsService {
         return booleanBuilder;
     }
 
-    public boolean check(String title) {
-        Posts entity = postsRepository.check(title);
+    public boolean check(String title, String user_email) {
+        Posts entity = postsRepository.check(title,user_email);
         boolean chk = (entity == null) ? false : true;
         return chk;
     }

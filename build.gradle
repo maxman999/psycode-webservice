@@ -33,8 +33,6 @@ dependencies {
     // Spring Data JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.h2database:h2'
-    //mustache
-    //implementation 'org.springframework.boot:spring-boot-starter-mustache'
     //spring-security
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     //spring-session-jdbc

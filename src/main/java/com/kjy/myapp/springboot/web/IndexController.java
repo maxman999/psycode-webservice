@@ -72,7 +72,6 @@ public class IndexController {
     public String news(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("keywords", keywordsService.getKeywordList(user.getEmail()));
-        System.out.println(keywordsService.getKeywordList(user.getEmail()));
         return "view/news/read";
     }
 

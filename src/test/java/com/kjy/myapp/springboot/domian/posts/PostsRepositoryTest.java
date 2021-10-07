@@ -1,5 +1,6 @@
 package com.kjy.myapp.springboot.domian.posts;
 
+import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
 import com.kjy.myapp.springboot.domain.posts.Posts;
 import com.kjy.myapp.springboot.domain.posts.PostsRepository;
 import com.kjy.myapp.springboot.domain.posts.QPosts;
@@ -32,6 +33,9 @@ import java.util.stream.IntStream;
 public class PostsRepositoryTest {
 
     @Autowired
+    private KeywordsRepository keywordsRepository;
+
+    @Autowired
     private PostsRepository postsRepository;
 
     @Autowired
@@ -50,6 +54,7 @@ public class PostsRepositoryTest {
 
     @After
     public void cleanup() {
+        keywordsRepository.deleteAll();
         postsRepository.deleteAll();
         userRepository.deleteAll();
     }
@@ -232,5 +237,50 @@ public class PostsRepositoryTest {
         });
     }
 
+    @Test
+    public void testCheck(){
+        User user = userRepository.findAll().get(0);
+        Posts posts = Posts.builder()
+                .title("title")
+                .description("content")
+                .summary("summary")
+                .originallink("www.kjy.com")
+                .pubdate("2021-09-23")
+                .user(user)
+                .build();
+        postsRepository.save(posts);
+
+        User user2 = User.builder()
+                .picture("testImg2")
+                .email("testEmail2")
+                .name("testName2")
+                .role(Role.USER)
+                .build();
+        userRepository.save(user2);
+        Posts posts2 = Posts.builder()
+                .title("title")
+                .description("content")
+                .summary("summary")
+                .originallink("www.kjy.com")
+                .pubdate("2021-09-23")
+                .user(user2)
+                .build();
+        postsRepository.save(posts2);
+
+        Posts result = postsRepository.check(posts.getTitle(),user.getEmail());
+        System.out.println("title1 : "  + result.getTitle());
+        System.out.println("user1 : "  + result.getUser().getEmail());
+        Posts result2 = postsRepository.check(posts2.getTitle(),user2.getEmail());
+        System.out.println("title2 : "  + result2.getTitle());
+        System.out.println("user2 : "  + result2.getUser().getEmail());
+
+        assertThat(result.getTitle()).isEqualTo(result2.getTitle());
+        assertThat(result.getUser().getEmail()).isEqualTo(user.getEmail());
+        assertThat(result2.getUser().getEmail()).isEqualTo(user2.getEmail());
+        assertThat(result.getUser().getEmail()).isNotEqualTo(result2.getUser().getEmail());
+
+
+
+    }
 
 }

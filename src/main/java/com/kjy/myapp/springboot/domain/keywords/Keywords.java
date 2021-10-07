@@ -24,13 +24,6 @@ public class Keywords extends BaseTimeEntity {
     @Column()
     private String keyword3_user;
 
-    @Column()
-    private String keyword1_recommend;
-    @Column()
-    private String keyword2_recommend;
-    @Column()
-    private String keyword3_recommend;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
