@@ -43,7 +43,7 @@ var main = {
                     _this.show(keyword);
                     $("#keyword-input").val(keyword);})
                 .catch(error => {console.log(error)})
-                .finally(()=>{$('#loading-spinner').css("display","none");});
+                .finally(()=>{$('#loading-div').css("display","none");});
         })
 
         $(document).on('click', '.no-criteria' ,function(){
@@ -166,7 +166,7 @@ var main = {
                 dataType : 'json',
                 contentType : 'application/json; charset=utf-8',
             }).done((result) => { resolve(result.keyword); })
-            .fail((error) => { alert("요청을 처리할 수 없습니다."); })
+            .fail((error) => { alert("요청을 처리할 수 없습니다. \n 스크랩북에 기사가 있는지 확인해주세요."); })
             .always(() => { $('#loading-div').css("display","none");
             });
         })
