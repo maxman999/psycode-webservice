@@ -8,7 +8,6 @@ import com.kjy.myapp.springboot.web.dto.PageRequestDto;
 import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
 import com.kjy.myapp.springboot.web.dto.ScrapRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +22,10 @@ public class IndexController {
     private final PostsService postsService;
     private final KeywordsService keywordsService;
 
-
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
-        if (user != null) {
+        if (user != null)
             model.addAttribute("userName", user.getName());
-        }
         return "index";
     }
 
@@ -37,6 +34,23 @@ public class IndexController {
         return "view/login";
     }
 
+    @GetMapping("portfolio")
+    public String portfolio() {
+        return "view/portfolio/read";
+    }
+
+    @GetMapping("portfolio/pdf")
+    public String pdfRead(@RequestParam String target, Model model) {
+        model.addAttribute("target", target);
+        return "view/portfolio/pdf-read";
+    }
+
+    @GetMapping("news")
+    public String news(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("keywords", keywordsService.getKeywordList(user.getEmail()));
+        return "view/news/read";
+    }
 
     @GetMapping("posts/read")
     public String postRead(Model model, PageRequestDto pageRequestDTO, @LoginUser SessionUser user) {
@@ -45,14 +59,14 @@ public class IndexController {
         return "view/posts/posts-read";
     }
 
-    // custom news 스크랩을 위한 위한 url
+    // 유저가 직접 news 스크랩을 하는 경우 호출하는 url
     @GetMapping("posts/save")
     public String postsSaveGet(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
         return "view/posts/posts-save";
     }
 
-    // api를 통한 news 스크랩을 위한 url
+    // 네이버 기사를 스크랩을 하는 경우 호출하는 url
     @PostMapping("posts/save")
     public String postsSavePost(Model model, @LoginUser SessionUser user, ScrapRequestDto scrapRequestDto) {
         model.addAttribute("userEmail", user.getEmail());
@@ -67,26 +81,5 @@ public class IndexController {
         model.addAttribute("page", page);
         return "view/posts/posts-update";
     }
-
-    @GetMapping("news")
-    public String news(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("userEmail", user.getEmail());
-        model.addAttribute("keywords", keywordsService.getKeywordList(user.getEmail()));
-        return "view/news/read";
-    }
-
-    @GetMapping("portfolio")
-    public String portfolio() {
-        return "view/portfolio/read";
-    }
-
-    @GetMapping("portfolio/pdf")
-    public String pdfRead(@RequestParam String target, Model model) {
-        System.out.println("target : " +  target);
-        model.addAttribute("target", target);
-        return "view/portfolio/pdf-read";
-    }
-
-
 
 }

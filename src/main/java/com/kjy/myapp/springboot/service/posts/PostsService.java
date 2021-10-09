@@ -34,20 +34,23 @@ public class PostsService {
         posts.update(requestDto.getTitle(), requestDto.getContent());
         return id;
     }
-
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         return new PostsResponseDto(entity);
     }
-
     @Transactional(readOnly = true)
     public List<PostsListResponseDto> findAllDesc() {
         return postsRepository.findAllDESC().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
     }
-
+    @Transactional()
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
+        postsRepository.delete(posts);
+    }
     @Transactional(readOnly = true)
     public PageResultDto<PostsListResponseDto, Posts> getListWithPaging(PageRequestDto requestDTO, String email) {
         Pageable pageable = requestDTO.getPageable(Sort.by("id").descending());
@@ -56,14 +59,6 @@ public class PostsService {
         Function<Posts, PostsListResponseDto> fn = (posts -> new PostsListResponseDto(posts));
         return new PageResultDto<>(result, fn);
     }
-
-    @Transactional()
-    public void delete(Long id) {
-        Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-        postsRepository.delete(posts);
-    }
-
     private BooleanBuilder getSearch(PageRequestDto requestDto, String email) {
         // Querydsl 처리
         String type = requestDto.getType();
@@ -90,9 +85,8 @@ public class PostsService {
         booleanBuilder.and(conditionalBuilder);
         return booleanBuilder;
     }
-
     public boolean check(String title, String user_email) {
-        Posts entity = postsRepository.check(title,user_email);
+        Posts entity = postsRepository.check(title, user_email);
         boolean chk = (entity == null) ? false : true;
         return chk;
     }

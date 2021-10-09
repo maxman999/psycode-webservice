@@ -1,10 +1,10 @@
 .login-form {
     padding : 10px;
     max-width: 600px;
-    margin: 12em auto;
+    margin: 10em auto;
 }
 .login-form form {
-    max-height: 430px;
+    max-height: 460px;
     background:  white;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1);
     padding: 10px 0 40px 0;
@@ -39,9 +39,10 @@
     z-index: 1;
 }
 .social-btn .btn {
+    background-color : white;
+    min-width : 195px;
     margin: 5px 0;
     font-size: 15px;
-    text-align: left;
     line-height: 24px;
 }
 .social-btn .btn i {
@@ -52,12 +53,6 @@
 }
 .social-btn p{
     margin: 0 0 0 1em;
-    font-size: 0.9em;
-}
-
-.social-btn a{
-    min-width : 180px;
-
 }
 
 .input-group-addon .fa{

@@ -111,4 +111,5 @@ public class PostsServiceTest {
         System.out.println("페이지 번호-----------------------------------------");
         resultDTO.getPageList().forEach(i -> System.out.print(i+" "));
     }
+
 }

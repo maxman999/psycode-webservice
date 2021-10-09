@@ -2,6 +2,7 @@ package com.kjy.myapp.springboot.config.auth.dto;
 
 import com.kjy.myapp.springboot.domain.user.User;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serializable;
 

@@ -55,22 +55,7 @@
                     <div class="col">
                         <!-- 출력할 뉴스가 없는 경우 -->
                         <div class="warning-wrapper" style="display:none;">
-                            <div class="shadow p-3 mb-3 bg-body rounded" style="height:510px;">
-                                <div class="row mt-5 div-warning">
-                                    <div class="col mt-5">
-                                        <h1 class="text-center"><i class="fas fa-exclamation-triangle m-3"></i> 불편을 드려 죄송합니다. </h1>
-                                        <h4 class="text-center mt-4"> <b>뉴스를 불러올 수 없습니다. </b></h4>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5" style="float: none; margin: 0 auto;">
-                                            <ol class="mt-5">
-                                                <li> 입력하신 검색어가 정확한지 확인해주세요. </li>
-                                                <li> 관심사 설정이 올바르게 되었는지 확인해주세요. </li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <th:block th:replace="fragment/no-news :: noNewsFragment"></th:block>
                         </div>
                         <!-- /출력할 뉴스가 없는 경우 -->
                         <div id="ol-news-main" class="ol-news list-group list-group-numbered">
@@ -111,40 +96,12 @@
     <!-- /loading & spinner -->
 
     <script th:inline="javascript">
-        <!-- 툴팁 & 팝오버 설정 -->
-        $(function(){
-            $("[data-bs-toggle=popover]").popover({
-                html: true,
-                trigger : 'focus',
-                content: function() {
-                return $('#popover-content').html();}
-            });
-
-            $('.tooltips').tooltip({
-                animation: true,
-                delay: {show:50, hide:10},
-                trigger: 'hover focus',
-                viewport: { selector: 'body', padding: 0 }
-            });
-        });
-
-        $('.tooltips').on("click", function(){
-            $('.tooltips').tooltip('hide');
-        });
-
-        $('#news-toggle').on("click", function(){
-            if($('#news-toggle i').attr("class") == "fas fa-chevron-up"){
-                $('#news-toggle i').attr("class","fas fa-chevron-down");
-            }else{
-                $('#news-toggle i').attr("class","fas fa-chevron-up");
-            }
-        });
-
         <!-- 타임리프 에러로 인해 밖으로 뺌. -->
         let userEmail = [[${userEmail}]];
     </script>
-    <script src="https://kit.fontawesome.com/71053a34c9.js" crossorigin="anonymous"></script>
+    <script th:inline="javascript" th:src="@{/js/bootstrap/popper.js}"></script>
     <script th:inline="javascript" th:src="@{/js/app/news.js}"></script>
+    <script src="https://kit.fontawesome.com/71053a34c9.js" crossorigin="anonymous"></script>
 
 
 </th:block>

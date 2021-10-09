@@ -20,7 +20,7 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping(value = "/error")
     public String handleError(HttpServletRequest request, Model model) {
-        // 에러 코드를 획득한다.
+        // 에러 코드 획득.
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         // 에러 코드에 대한 상태 정보
         HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(status.toString()));
@@ -39,11 +39,9 @@ public class CustomErrorController implements ErrorController {
             }
             // 500 error
             if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                // 서버에 대한 에러이기 때문에 사용자에게 정보를 제공하지 않는다.
                 return ERROR_404_PAGE_PATH;
             }
         }
-        // 정의한 에러 외 모든 에러는 error/error 페이지로 보낸다.
         return ERROR_404_PAGE_PATH;
     }
 

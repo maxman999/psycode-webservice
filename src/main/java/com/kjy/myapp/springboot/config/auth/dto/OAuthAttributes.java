@@ -25,7 +25,6 @@ public class OAuthAttributes {
         this.picture = picture;
     }
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
-        System.out.println(registrationId);
         if("naver".equals(registrationId)){
             return ofNaver("id", attributes);
         }else if("github".equals(registrationId)){

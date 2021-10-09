@@ -1,10 +1,9 @@
 var main = {
     init : function () {
         var _this = this;
-
         $('#posts-form').submit(function(e){
-                    e.preventDefault();
-                    _this.save();
+            e.preventDefault();
+            _this.save();
         });
         $('#btn-update').on('click', function(){
             _this.update();

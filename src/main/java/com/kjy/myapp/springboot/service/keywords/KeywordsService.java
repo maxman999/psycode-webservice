@@ -30,8 +30,8 @@ public class KeywordsService {
     }
 
     public List getKeywordList(String user_email){
-        Keywords keywords = new Keywords();
-        List<String> keyList = new ArrayList<String>();
+        Keywords keywords;
+        List<String> keyList = new ArrayList<>();
         Optional opt = keywordsRepository.findByUser_email(user_email);
         if(opt.isPresent()){
             keywords = (Keywords) opt.get();

@@ -17,11 +17,11 @@ public class Keywords extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column()
+    @Column(length = 30)
     private String keyword1_user;
-    @Column()
+    @Column(length = 30)
     private String keyword2_user;
-    @Column()
+    @Column(length = 30)
     private String keyword3_user;
 
     @ManyToOne(fetch = FetchType.LAZY)

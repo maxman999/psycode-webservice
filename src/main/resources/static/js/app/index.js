@@ -5,7 +5,6 @@ var main = {
             e.preventDefault();
             _this.kewordsSave();
         })
-
     },
     kewordsSave : function () {
         let data = {
@@ -14,7 +13,6 @@ var main = {
             keyword3_user : $('#keyword3').val(),
             useremail : $('#email').val(),
         };
-        console.log(data);
         $.ajax({
             type : 'POST',
             url : '/api/v1/keywords',
@@ -25,7 +23,7 @@ var main = {
             alert('수정되었습니다.');
             $('#settingModal').modal('hide');
         }).fail(function (error){
-            alert(JSON.stringify(error));
+            console.log(JSON.stringify(error));
         });
     }
 };

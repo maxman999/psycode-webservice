@@ -18,19 +18,19 @@ public class Posts extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 80, nullable = false)
     private String title; // news title
 
     @Column(columnDefinition = "Text", nullable = false)
     private String description; // news description
 
-    @Column(nullable = false)
+    @Column(length=150, nullable = false)
     private  String originallink; // news link
 
-    @Column(nullable = false)
+    @Column(length = 20 ,nullable = false)
     private  String pubdate; // news pubdate
 
-    @Column(nullable = true)
+    @Column(columnDefinition = "Text", nullable = true)
     private String summary; // news summary created by author
 
     @ManyToOne(fetch = FetchType.LAZY)

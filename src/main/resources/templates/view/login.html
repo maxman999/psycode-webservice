@@ -11,36 +11,36 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="row login-form">
-        <form class = "col-md-12 form-group" style = "float: none; margin: 0 auto;">
-            <h1 class="text-center">Sign In</h1>
-            <div class="hint-text small">with your social media account</div>
-            <hr>
-            <div class="text-center social-btn">
-                <div class="row">
-                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+    <div class="row" style="margin-top : 8em">
+        <div class="col-md-12 login-form" style = "float: none; margin: 0 auto; padding:2em">
+            <form class = "form-group" action="/login" method="post">
+                <input type="hidden" name="username" value="GUEST">
+                <input type="hidden" name="password" value="GUEST">
+                <h1 class="text-center">Sign In</h1>
+                <div class="hint-text small">with your social media account</div>
+                <hr>
+                <div class="row social-btn">
+                    <div class="col-xs-6" style="float: none; margin: 0 auto;">
                         <a href="/oauth2/authorization/google" class="btn btn-block" style="color: red;"><i class="fa fa-google"></i><p>Sign in with <b>Google</b></p></a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+                    <div class="col-xs-6" style="float: none; margin: 0 auto;">
                         <a href="/oauth2/authorization/naver" class="btn btn-block" style="color: green;"><i class="fa fa-naver"><span style="font-weight:900;">N</span></i><p>Sign in with <b>Naver</b></p></a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5"    style = "float: none; margin: 0 auto;">
+                    <div class="col-xs-6" style="float: none; margin: 0 auto;">
                         <a href="/oauth2/authorization/github" class="btn btn-block" style="color: black;"><i class="fa fa-github"></i><p>Sign in with <b>Github</b></p></a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5" style = "float: none; margin: 0 auto;">
+                    <div class="col-xs-6" style="float: none; margin: 0 auto;">
                         <a href="/oauth2/authorization/kakao" class="btn btn-block" style="color: #fabe43; text-shadow: 1px 1xpx 0px black;"><i class="fa fa-kakao"><span style="font-weight:900;">K</span></i><p>Sign in with <b>Kakao</b></p></a>
                     </div>
+                    <hr>
+                    <div class="col-xs-6" style="float: none; margin: 0 auto;">
+                        <button type ="submit" class="btn btn-block" style="color: #708090; text-shadow: 1px 1xpx 0px black;"><i class="fas fa-child"></i><p>Use as a <b>GUEST</b></p></button>
+                    </div>
                 </div>
-                <hr>
-
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
+
+    <script src="https://kit.fontawesome.com/71053a34c9.js" crossorigin="anonymous"></script>
 </body>
 </html>

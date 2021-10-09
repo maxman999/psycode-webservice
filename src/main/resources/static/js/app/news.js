@@ -18,12 +18,11 @@ var main = {
                 }
             }
         }
-
-
         $("#keyword-search").on('click', function(){
             let keyword = $('#keyword-input').val();
             _this.show(keyword);
         })
+
         $("#keyword-input").on("keyup",function(key){
             if(key.keyCode==13) {
                 let keyword = $('#keyword-input').val();
@@ -49,6 +48,15 @@ var main = {
         $(document).on('click', '.no-criteria' ,function(){
             $('#settingModal').modal('show');
         })
+
+        $('#news-toggle').on("click", function(){
+            if($('#news-toggle i').attr("class") == "fas fa-chevron-up"){
+                $('#news-toggle i').attr("class","fas fa-chevron-down");
+            }else{
+                $('#news-toggle i').attr("class","fas fa-chevron-up");
+            }
+        });
+
     },
 
     show : function(inputkey) {
@@ -140,7 +148,8 @@ var main = {
     check : function (target) {
         let title = target.find(".title").text();
         var data = {
-                    title : target.find(".title").text()
+                    title : target.find(".title").text(),
+                    useremail : userEmail  // news/read.html에서 타임리프로 선언한 값.
                     };
         let isDuple;
         $.ajax({

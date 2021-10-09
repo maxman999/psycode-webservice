@@ -46,7 +46,7 @@ public class KeywordsRepositoryTest {
     }
 
     @Test
-    public void testInsertAndGetKeyword() {
+    public void testInsertAndGetKeywords() {
         //given
         String key1 = "인공지능";
         String key2 = "연예";
