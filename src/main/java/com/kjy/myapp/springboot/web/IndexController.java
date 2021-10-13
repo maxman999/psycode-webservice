@@ -3,9 +3,9 @@ package com.kjy.myapp.springboot.web;
 import com.kjy.myapp.springboot.config.auth.LoginUser;
 import com.kjy.myapp.springboot.config.auth.dto.SessionUser;
 import com.kjy.myapp.springboot.service.keywords.KeywordsService;
-import com.kjy.myapp.springboot.service.posts.PostsService;
+import com.kjy.myapp.springboot.service.scraps.ScrapsService;
 import com.kjy.myapp.springboot.web.dto.PageRequestDto;
-import com.kjy.myapp.springboot.web.dto.PostsResponseDto;
+import com.kjy.myapp.springboot.web.dto.ScrapsResponseDto;
 import com.kjy.myapp.springboot.web.dto.ScrapRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-    private final PostsService postsService;
+    private final ScrapsService scrapsService;
     private final KeywordsService keywordsService;
 
     @GetMapping("/")
@@ -52,34 +52,34 @@ public class IndexController {
         return "view/news/read";
     }
 
-    @GetMapping("posts/read")
+    @GetMapping("scraps/read")
     public String postRead(Model model, PageRequestDto pageRequestDTO, @LoginUser SessionUser user) {
-        model.addAttribute("result", postsService.getListWithPaging(pageRequestDTO, user.getEmail()));
+        model.addAttribute("result", scrapsService.getListWithPaging(pageRequestDTO, user.getEmail()));
         model.addAttribute("request", pageRequestDTO);
-        return "view/posts/posts-read";
+        return "view/scraps/scraps-read";
     }
 
     // 유저가 직접 news 스크랩을 하는 경우 호출하는 url
-    @GetMapping("posts/save")
-    public String postsSaveGet(Model model, @LoginUser SessionUser user) {
+    @GetMapping("scraps/save")
+    public String scrapsSaveGet(Model model, @LoginUser SessionUser user) {
         model.addAttribute("userEmail", user.getEmail());
-        return "view/posts/posts-save";
+        return "view/scraps/scraps-save";
     }
 
     // 네이버 기사를 스크랩을 하는 경우 호출하는 url
-    @PostMapping("posts/save")
-    public String postsSavePost(Model model, @LoginUser SessionUser user, ScrapRequestDto scrapRequestDto) {
+    @PostMapping("scraps/save")
+    public String scrapsSavePost(Model model, @LoginUser SessionUser user, ScrapRequestDto scrapRequestDto) {
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("news", scrapRequestDto);
-        return "view/posts/posts-save";
+        return "view/scraps/scraps-save";
     }
 
-    @GetMapping("posts/update/{id}")
+    @GetMapping("scraps/update/{id}")
     public String postUpdate(@PathVariable Long id, @RequestParam int page, Model model) {
-        PostsResponseDto dto = postsService.findById(id);
+        ScrapsResponseDto dto = scrapsService.findById(id);
         model.addAttribute("post", dto);
         model.addAttribute("page", page);
-        return "view/posts/posts-update";
+        return "view/scraps/scraps-update";
     }
 
 }

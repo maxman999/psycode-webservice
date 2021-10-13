@@ -1,14 +1,13 @@
 package com.kjy.myapp.springboot.web.dto;
 
-import com.kjy.myapp.springboot.domain.posts.Posts;
+import com.kjy.myapp.springboot.domain.scraps.Scraps;
 import com.kjy.myapp.springboot.domain.user.User;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class PostsListResponseDto {
+public class ScrapsListResponseDto {
     private Long id;
     private String title;
     private User user;
@@ -16,7 +15,7 @@ public class PostsListResponseDto {
     private LocalDateTime modifiedDate;
     private String originallink;
 
-    public PostsListResponseDto(Posts entity){
+    public ScrapsListResponseDto(Scraps entity){
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.user = entity.getUser();

@@ -134,13 +134,13 @@ var main = {
                     };
         $.ajax({
             type : 'POST',
-            url : '/api/v1/posts',
+            url : '/api/v1/scraps',
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function(){
             alert('글이 등록되었습니다.');
-            // window.location.href = '/posts/read?page=1';
+            // window.location.href = '/scraps/read?page=1';
         }).fail(function (error){
             alert("요청을 처리할 수 없습니다.");
         });
@@ -154,7 +154,7 @@ var main = {
         let isDuple;
         $.ajax({
             type : 'POST',
-            url : '/api/v1/posts/check',
+            url : '/api/v1/scraps/check',
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data),

@@ -1,13 +1,13 @@
 package com.kjy.myapp.springboot.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kjy.myapp.springboot.domain.posts.Posts;
-import com.kjy.myapp.springboot.domain.posts.PostsRepository;
+import com.kjy.myapp.springboot.domain.scraps.Scraps;
+import com.kjy.myapp.springboot.domain.scraps.ScrapsRepository;
 import com.kjy.myapp.springboot.domain.user.Role;
 import com.kjy.myapp.springboot.domain.user.User;
 import com.kjy.myapp.springboot.domain.user.UserRepository;
-import com.kjy.myapp.springboot.web.dto.PostsSaveRequestDto;
-import com.kjy.myapp.springboot.web.dto.PostsUpdateRequestDto;
+import com.kjy.myapp.springboot.web.dto.ScrapsSaveRequestDto;
+import com.kjy.myapp.springboot.web.dto.ScrapsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PostsApiControllerTest {
+public class ScrapsApiControllerTest {
 
     @LocalServerPort
     private int port;
@@ -45,7 +45,7 @@ public class PostsApiControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private PostsRepository postsRepository;
+    private ScrapsRepository scrapsRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -73,13 +73,13 @@ public class PostsApiControllerTest {
 
     @After
     public void tearDown() throws Exception {
-        postsRepository.deleteAll();
+        scrapsRepository.deleteAll();
         userRepository.deleteAll();
     }
 
     @Test
     @WithMockUser(roles="USER")
-    public void Posts_register() throws Exception {
+    public void scraps_register() throws Exception {
         //given
         String title = "title";
         String description = "description";
@@ -88,7 +88,7 @@ public class PostsApiControllerTest {
         String originallink = "www.kjy.com";
         User user = userRepository.findAll().get(0);
 
-        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+        ScrapsSaveRequestDto requestDto = ScrapsSaveRequestDto.builder()
                 .title(title)
                 .description(description)
                 .useremail(user.getEmail())
@@ -97,7 +97,7 @@ public class PostsApiControllerTest {
                 .originallink(originallink)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/posts";
+        String url = "http://localhost:" + port + "/api/v1/scraps";
 
         //when
         mvc.perform(post(url)
@@ -106,17 +106,17 @@ public class PostsApiControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        List<Posts> all = postsRepository.findAll();
+        List<Scraps> all = scrapsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getDescription()).isEqualTo(description);
     }
 
     @Test
     @WithMockUser(roles="USER")
-    public void Posts_update() throws Exception {
+    public void scraps_update() throws Exception {
         //given
         User user = userRepository.findAll().get(0);
-        Posts savedPosts = postsRepository.save(Posts.builder()
+        Scraps savedScraps = scrapsRepository.save(Scraps.builder()
                 .title("title")
                 .description("description")
                 .summary("summary")
@@ -125,16 +125,16 @@ public class PostsApiControllerTest {
                 .user(user)
                 .build());
 
-        Long updateId = savedPosts.getId();
+        Long updateId = savedScraps.getId();
         String expectedTitle = "title2";
         String expectedContent = "content2";
 
-        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
+        ScrapsUpdateRequestDto requestDto = ScrapsUpdateRequestDto.builder()
                 .title(expectedTitle)
                 .content(expectedContent)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+        String url = "http://localhost:" + port + "/api/v1/scraps/" + updateId;
 
         //when
         mvc.perform(put(url)
@@ -143,7 +143,7 @@ public class PostsApiControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        List<Posts> all = postsRepository.findAll();
+        List<Scraps> all = scrapsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getDescription()).isEqualTo(expectedContent);
     }

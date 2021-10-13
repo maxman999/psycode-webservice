@@ -3,14 +3,14 @@
       layout:decorate="~{layout/basic}">
 
 <th:block layout:fragment="content">
-    <link href="/css/posts.css" rel="stylesheet"/>
+    <link href="/css/scraps.css" rel="stylesheet"/>
 
     <div class="row mt-5 scrap-div">
         <div class="col-md-12 p-4">
             <div class="col-md-5 shadow p-3 mb-5 bg-body rounded" style="float: none; margin: 0 auto;">
                 <h3> NEWS SCRAP </h3>
                 <hr>
-                <form id = "posts-form">
+                <form id = "scraps-form">
                     <div class="form-group">
                         <input type="text" class="form-control mb-2" id="title" placeholder="제목을 입력해주세요" required maxlength="75">
                     </div>
@@ -26,7 +26,7 @@
                     <input type="hidden" class="form-control" id="useremail" th:value="${userEmail}" readonly>
                     <input type="hidden" class="form-control" id="summary">
                     <div style="text-align: right;">
-                        <a href="/posts/read" role="button" class="btn btn-outline-secondary">취소</a>
+                        <a href="/scraps/read" role="button" class="btn btn-outline-secondary">취소</a>
                         <button type="submit" class="btn btn-outline-success" id="btn-save">등록</button>
                     </div>
                 </form>
@@ -36,6 +36,6 @@
     <script th:inline="javascript">
         var page = [[${page}]];
     </script>
-    <script th:inline="javascript" th:src="@{/js/app/posts.js}"></script>
+    <script th:inline="javascript" th:src="@{/js/app/scraps.js}"></script>
 </th:block>
 </html>

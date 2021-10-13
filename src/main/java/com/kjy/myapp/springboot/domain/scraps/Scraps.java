@@ -1,18 +1,17 @@
-package com.kjy.myapp.springboot.domain.posts;
+package com.kjy.myapp.springboot.domain.scraps;
 
 import com.kjy.myapp.springboot.domain.BaseTimeEntity;
 import com.kjy.myapp.springboot.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts extends BaseTimeEntity {
+public class Scraps extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +36,7 @@ public class Posts extends BaseTimeEntity {
     private User user; //author
 
     @Builder
-    public Posts(String title, String description, String originallink, String pubdate, String summary ,User user){
+    public Scraps(String title, String description, String originallink, String pubdate, String summary , User user){
         this.title = title;
         this.description = description;
         this.originallink = originallink;

@@ -1,11 +1,11 @@
 package com.kjy.myapp.springboot.service;
 
-import com.kjy.myapp.springboot.domain.posts.Posts;
-import com.kjy.myapp.springboot.domain.posts.PostsRepository;
+import com.kjy.myapp.springboot.domain.scraps.Scraps;
+import com.kjy.myapp.springboot.domain.scraps.ScrapsRepository;
 import com.kjy.myapp.springboot.domain.user.Role;
 import com.kjy.myapp.springboot.domain.user.User;
 import com.kjy.myapp.springboot.domain.user.UserRepository;
-import com.kjy.myapp.springboot.service.posts.PostsService;
+import com.kjy.myapp.springboot.service.scraps.ScrapsService;
 import com.kjy.myapp.springboot.web.dto.*;
 import org.junit.After;
 import org.junit.Before;
@@ -22,16 +22,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostsServiceTest {
+public class ScrapsServiceTest {
 
     @Autowired
-    private PostsService postsService;
+    private ScrapsService scrapsService;
 
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    PostsRepository postsRepository;
+    ScrapsRepository scrapsRepository;
 
     @Before
     public void setup(){
@@ -46,7 +46,7 @@ public class PostsServiceTest {
 
     @After
     public void cleanup() {
-        postsRepository.deleteAll();
+        scrapsRepository.deleteAll();
         userRepository.deleteAll();
     }
 
@@ -55,7 +55,7 @@ public class PostsServiceTest {
     public void testInsert(){
         User user = userRepository.findAll().get(0);
         System.out.println("user : " + user.getEmail());
-        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+        ScrapsSaveRequestDto requestDto = ScrapsSaveRequestDto.builder()
                 .title("title")
                 .description("content")
                 .pubdate("2021-09-23")
@@ -63,12 +63,12 @@ public class PostsServiceTest {
                 .summary("test")
                 .useremail(user.getEmail())
                 .build();
-        postsService.save(requestDto);
+        scrapsService.save(requestDto);
         //when
-        List<PostsListResponseDto> postList = postsService.findAllDesc();
+        List<ScrapsListResponseDto> postList = scrapsService.findAllDesc();
         //then
-        PostsListResponseDto postsListResponseDto = postList.get(0);
-        assertThat(postsListResponseDto.getTitle()).isEqualTo("title");
+        ScrapsListResponseDto scrapsListResponseDto = postList.get(0);
+        assertThat(scrapsListResponseDto.getTitle()).isEqualTo("title");
     }
 
     @Test
@@ -78,14 +78,14 @@ public class PostsServiceTest {
                 .size(10)
                 .build();
 
-        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDTO, "testEmail");
+        PageResultDto<ScrapsListResponseDto, Scraps> resultDTO = scrapsService.getListWithPaging(pageRequestDTO, "testEmail");
 
         System.out.println("PREV: " + resultDTO.isPrev());
         System.out.println("NEXT: " + resultDTO.isNext());
         System.out.println("TOTAL: " + resultDTO.getTotalPage());
-        System.out.println("postsDTO-----------------------------------------");
-        for (PostsListResponseDto postsListResponseDto : resultDTO.getDtoList()){
-            System.out.println(postsListResponseDto);
+        System.out.println("scrapsDTO-----------------------------------------");
+        for (ScrapsListResponseDto scrapsListResponseDto : resultDTO.getDtoList()){
+            System.out.println(scrapsListResponseDto);
         }
         System.out.println("페이지 번호-----------------------------------------");
         resultDTO.getPageList().forEach(i -> System.out.print(i+" "));
@@ -99,14 +99,14 @@ public class PostsServiceTest {
                 .type("tc")
                 .keyword("title")
                 .build();
-        PageResultDto<PostsListResponseDto, Posts> resultDTO = postsService.getListWithPaging(pageRequestDto, "testEmail");
+        PageResultDto<ScrapsListResponseDto, Scraps> resultDTO = scrapsService.getListWithPaging(pageRequestDto, "testEmail");
 
         System.out.println("PREV: " + resultDTO.isPrev());
         System.out.println("NEXT: " + resultDTO.isNext());
         System.out.println("TOTAL: " + resultDTO.getTotalPage());
-        System.out.println("postsDTO-----------------------------------------");
-        for (PostsListResponseDto postsListResponseDto : resultDTO.getDtoList()){
-            System.out.println(postsListResponseDto);
+        System.out.println("scrapsDTO-----------------------------------------");
+        for (ScrapsListResponseDto scrapsListResponseDto : resultDTO.getDtoList()){
+            System.out.println(scrapsListResponseDto);
         }
         System.out.println("페이지 번호-----------------------------------------");
         resultDTO.getPageList().forEach(i -> System.out.print(i+" "));

@@ -1,17 +1,17 @@
 package com.kjy.myapp.springboot.web.dto;
 
-import com.kjy.myapp.springboot.domain.posts.Posts;
+import com.kjy.myapp.springboot.domain.scraps.Scraps;
 import com.kjy.myapp.springboot.domain.user.User;
 import lombok.Getter;
 
 @Getter
-public class PostsResponseDto {
+public class ScrapsResponseDto {
     private Long id;
     private String title;
     private String description;
     private User user;
 
-    public PostsResponseDto(Posts entity){
+    public ScrapsResponseDto(Scraps entity){
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.description = entity.getDescription();

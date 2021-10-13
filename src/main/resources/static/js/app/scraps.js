@@ -1,7 +1,7 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#posts-form').submit(function(e){
+        $('#scraps-form').submit(function(e){
             e.preventDefault();
             _this.save();
         });
@@ -35,13 +35,13 @@ var main = {
         console.log(data);
         $.ajax({
             type : 'POST',
-            url : '/api/v1/posts',
+            url : '/api/v1/scraps',
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function(){
             alert('글이 등록되었습니다.');
-            window.location.href = '/posts/read?page=1';
+            window.location.href = '/scraps/read?page=1';
         }).fail(function (error){
             alert(JSON.stringify(error));
         });
@@ -54,13 +54,13 @@ var main = {
         var id = $('#id').val();
         $.ajax({
             type : 'PUT',
-            url : '/api/v1/posts/'+id,
+            url : '/api/v1/scraps/'+id,
             dataType : 'json',
             contentType : 'application/json; charset = utf-8',
             data : JSON.stringify(data)
         }).done(function(){
             alert('글이 수정되었습니다.');
-            window.location.href = '/posts/read?page='+page;
+            window.location.href = '/scraps/read?page='+page;
         }).fail(function(error){
             alert(JSON.stringify(error))
         });
@@ -71,7 +71,7 @@ var main = {
         console.log("id : " + id)
         $.ajax({
             type : 'DELETE',
-            url : '/api/v1/posts/' + id,
+            url : '/api/v1/scraps/' + id,
             dataType : 'json',
             contentType : 'application/json; charset=utf-8'
         }).done(function(){

@@ -1,16 +1,11 @@
 package com.kjy.myapp.springboot.service;
 
-import com.kjy.myapp.springboot.domain.keywords.Keywords;
 import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
-import com.kjy.myapp.springboot.domain.posts.Posts;
 import com.kjy.myapp.springboot.domain.user.Role;
 import com.kjy.myapp.springboot.domain.user.User;
 import com.kjy.myapp.springboot.domain.user.UserRepository;
 import com.kjy.myapp.springboot.service.keywords.KeywordsService;
 import com.kjy.myapp.springboot.web.dto.KeywordsSaveRequestDto;
-import com.kjy.myapp.springboot.web.dto.PageRequestDto;
-import com.kjy.myapp.springboot.web.dto.PageResultDto;
-import com.kjy.myapp.springboot.web.dto.PostsListResponseDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

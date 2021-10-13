@@ -1,13 +1,13 @@
-package com.kjy.myapp.springboot.domian.posts;
+package com.kjy.myapp.springboot.domian.scraps;
 
 import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
-import com.kjy.myapp.springboot.domain.posts.Posts;
-import com.kjy.myapp.springboot.domain.posts.PostsRepository;
-import com.kjy.myapp.springboot.domain.posts.QPosts;
+import com.kjy.myapp.springboot.domain.scraps.QScraps;
+import com.kjy.myapp.springboot.domain.scraps.Scraps;
+import com.kjy.myapp.springboot.domain.scraps.ScrapsRepository;
 import com.kjy.myapp.springboot.domain.user.Role;
 import com.kjy.myapp.springboot.domain.user.User;
 import com.kjy.myapp.springboot.domain.user.UserRepository;
-import com.kjy.myapp.springboot.web.dto.PostsSaveRequestDto;
+import com.kjy.myapp.springboot.web.dto.ScrapsSaveRequestDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.After;
@@ -30,13 +30,13 @@ import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostsRepositoryTest {
+public class ScrapsRepositoryTest {
 
     @Autowired
     private KeywordsRepository keywordsRepository;
 
     @Autowired
-    private PostsRepository postsRepository;
+    private ScrapsRepository scrapsRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -55,7 +55,7 @@ public class PostsRepositoryTest {
     @After
     public void cleanup() {
         keywordsRepository.deleteAll();
-        postsRepository.deleteAll();
+        scrapsRepository.deleteAll();
         userRepository.deleteAll();
     }
 
@@ -65,7 +65,7 @@ public class PostsRepositoryTest {
         String title = "테스트 게시글";
         String description = "테스트 본문";
         User user = userRepository.findAll().get(0);
-        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+        ScrapsSaveRequestDto requestDto = ScrapsSaveRequestDto.builder()
                 .title(title)
                 .description(description)
                 .pubdate("2021-09-23")
@@ -74,16 +74,16 @@ public class PostsRepositoryTest {
                 .useremail(user.getEmail())
                 .build();
 
-        postsRepository.save(requestDto.toEntity());
+        scrapsRepository.save(requestDto.toEntity());
         System.out.println(requestDto.toEntity().getDescription());
 
         //when
-        List<Posts> postList = postsRepository.findAll();
+        List<Scraps> postList = scrapsRepository.findAll();
         //then
-        Posts posts = postList.get(0);
-        assertThat(posts.getTitle()).isEqualTo(title);
-        assertThat(posts.getDescription()).isEqualTo(description);
-        assertThat(posts.getUser().getEmail()).isEqualTo(user.getEmail());
+        Scraps scraps = postList.get(0);
+        assertThat(scraps.getTitle()).isEqualTo(title);
+        assertThat(scraps.getDescription()).isEqualTo(description);
+        assertThat(scraps.getUser().getEmail()).isEqualTo(user.getEmail());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class PostsRepositoryTest {
         String pubdate = "2021-09-23";
         User user = userRepository.findAll().get(0);
 
-        Posts posts = Posts.builder()
+        Scraps scraps = Scraps.builder()
                 .title(title)
                 .description(description)
                 .summary(summary)
@@ -104,11 +104,11 @@ public class PostsRepositoryTest {
                 .pubdate(pubdate)
                 .user(user)
                 .build();
-        System.out.println("before update: " + postsRepository.save(posts).getDescription());
-        assertThat(posts.getDescription()).isEqualTo(description);
-        posts.update(title, description2);
-        System.out.println("after update: " + postsRepository.save(posts).getDescription());
-        assertThat(posts.getDescription()).isEqualTo(description2);
+        System.out.println("before update: " + scrapsRepository.save(scraps).getDescription());
+        assertThat(scraps.getDescription()).isEqualTo(description);
+        scraps.update(title, description2);
+        System.out.println("after update: " + scrapsRepository.save(scraps).getDescription());
+        assertThat(scraps.getDescription()).isEqualTo(description2);
     }
 
     @Test
@@ -121,7 +121,7 @@ public class PostsRepositoryTest {
         String pubdate = "2021-09-23";
         User user = userRepository.findAll().get(0);
 
-        Posts posts = Posts.builder()
+        Scraps scraps = Scraps.builder()
                 .title(title)
                 .description(description)
                 .summary(summary)
@@ -129,9 +129,9 @@ public class PostsRepositoryTest {
                 .pubdate(pubdate)
                 .user(user)
                 .build();
-        System.out.println("before delete : " + postsRepository.save(posts).getDescription());
-        postsRepository.deleteAll();
-        assertThat(postsRepository.findAll()).isEmpty();
+        System.out.println("before delete : " + scrapsRepository.save(scraps).getDescription());
+        scrapsRepository.deleteAll();
+        assertThat(scrapsRepository.findAll()).isEmpty();
     }
 
     @Test
@@ -140,7 +140,7 @@ public class PostsRepositoryTest {
         LocalDateTime now = LocalDateTime.of(2019, 6, 4, 0, 0, 0);
         User user = userRepository.findAll().get(0);
 
-        postsRepository.save(Posts.builder()
+        scrapsRepository.save(Scraps.builder()
                 .title("title")
                 .description("content")
                 .summary("summary")
@@ -149,14 +149,14 @@ public class PostsRepositoryTest {
                 .user(user)
                 .build());
         //when
-        List<Posts> postList = postsRepository.findAll();
+        List<Scraps> postList = scrapsRepository.findAll();
 
         //then
-        Posts posts = postList.get(0);
-        System.out.println(">>>>>> createData = " + posts.getCreateDate() + ", modifiedData = " + posts.getModifiedDate());
+        Scraps scraps = postList.get(0);
+        System.out.println(">>>>>> createData = " + scraps.getCreateDate() + ", modifiedData = " + scraps.getModifiedDate());
 
-        assertThat(posts.getCreateDate().isAfter(now));
-        assertThat(posts.getModifiedDate().isAfter(now));
+        assertThat(scraps.getCreateDate().isAfter(now));
+        assertThat(scraps.getModifiedDate().isAfter(now));
     }
 
     @Test
@@ -164,7 +164,7 @@ public class PostsRepositoryTest {
         User user = userRepository.findAll().get(0);
 
         IntStream.rangeClosed(1, 100).forEach(i -> {
-            Posts posts = Posts.builder()
+            Scraps scraps = Scraps.builder()
                     .title("title")
                     .description("content")
                     .summary("summary")
@@ -172,7 +172,7 @@ public class PostsRepositoryTest {
                     .pubdate("2021-09-23")
                     .user(user)
                     .build();
-            postsRepository.save(posts);
+            scrapsRepository.save(scraps);
         });
     }
 
@@ -180,7 +180,7 @@ public class PostsRepositoryTest {
     public void testPageDefault() {
         //1페이지 10개
         Pageable pageable = PageRequest.of(0, 10);
-        Page<Posts> result = postsRepository.findAll(pageable);
+        Page<Scraps> result = scrapsRepository.findAll(pageable);
         System.out.println(result);
         System.out.println("--------------------------------");
         System.out.println("Total Pages : " + result.getTotalPages()); // 전체 페이지 수
@@ -190,8 +190,8 @@ public class PostsRepositoryTest {
         System.out.println("has next page? : " + result.hasNext()); // 다음 페이지 존재 여부
         System.out.println("first page? : " + result.isFirst()); // 시작 페이지(0) 여부
         System.out.println("--------------------------------");
-        for (Posts posts : result.getContent()) {
-            System.out.println(posts);
+        for (Scraps scraps : result.getContent()) {
+            System.out.println(scraps);
         }
     }
 
@@ -199,7 +199,7 @@ public class PostsRepositoryTest {
     public void testSort() {
         Sort sort1 = Sort.by("id").descending();
         Pageable pageable = PageRequest.of(0, 10, sort1);
-        Page<Posts> result = postsRepository.findAll(pageable);
+        Page<Scraps> result = scrapsRepository.findAll(pageable);
         result.get().forEach(post -> {
             System.out.println(post);
         });
@@ -208,12 +208,12 @@ public class PostsRepositoryTest {
     @Test
     public void testQuerydsl() {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("id").descending());
-        QPosts qPosts = QPosts.posts;
+        QScraps qScraps = QScraps.scraps;
         String keyword = "1";
         BooleanBuilder builder = new BooleanBuilder();
-        BooleanExpression expression = qPosts.title.contains(keyword);
+        BooleanExpression expression = qScraps.title.contains(keyword);
         builder.and(expression);
-        Page<Posts> result = postsRepository.findAll(builder, pageable);
+        Page<Scraps> result = scrapsRepository.findAll(builder, pageable);
 
         result.stream().forEach(post -> {
             System.out.println(post);
@@ -223,15 +223,15 @@ public class PostsRepositoryTest {
     @Test
     public void testQuerydsl2() {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("id").descending());
-        QPosts qPosts = QPosts.posts;
+        QScraps qScraps = QScraps.scraps;
         String keyword = "1";
         BooleanBuilder builder = new BooleanBuilder();
-        BooleanExpression exTitle = qPosts.title.contains(keyword);
-        BooleanExpression exContent = qPosts.description.contains(keyword);
+        BooleanExpression exTitle = qScraps.title.contains(keyword);
+        BooleanExpression exContent = qScraps.description.contains(keyword);
         BooleanExpression exAll = exTitle.or(exContent);
         builder.and(exAll);
-        builder.and(qPosts.id.gt(0L));
-        Page<Posts> result = postsRepository.findAll(builder, pageable);
+        builder.and(qScraps.id.gt(0L));
+        Page<Scraps> result = scrapsRepository.findAll(builder, pageable);
         result.stream().forEach(post -> {
             System.out.println(post);
         });
@@ -240,7 +240,7 @@ public class PostsRepositoryTest {
     @Test
     public void testCheck(){
         User user = userRepository.findAll().get(0);
-        Posts posts = Posts.builder()
+        Scraps scraps = Scraps.builder()
                 .title("title")
                 .description("content")
                 .summary("summary")
@@ -248,7 +248,7 @@ public class PostsRepositoryTest {
                 .pubdate("2021-09-23")
                 .user(user)
                 .build();
-        postsRepository.save(posts);
+        scrapsRepository.save(scraps);
 
         User user2 = User.builder()
                 .picture("testImg2")
@@ -257,7 +257,7 @@ public class PostsRepositoryTest {
                 .role(Role.USER)
                 .build();
         userRepository.save(user2);
-        Posts posts2 = Posts.builder()
+        Scraps scraps2 = Scraps.builder()
                 .title("title")
                 .description("content")
                 .summary("summary")
@@ -265,12 +265,12 @@ public class PostsRepositoryTest {
                 .pubdate("2021-09-23")
                 .user(user2)
                 .build();
-        postsRepository.save(posts2);
+        scrapsRepository.save(scraps2);
 
-        Posts result = postsRepository.check(posts.getTitle(),user.getEmail());
+        Scraps result = scrapsRepository.check(scraps.getTitle(),user.getEmail());
         System.out.println("title1 : "  + result.getTitle());
         System.out.println("user1 : "  + result.getUser().getEmail());
-        Posts result2 = postsRepository.check(posts2.getTitle(),user2.getEmail());
+        Scraps result2 = scrapsRepository.check(scraps2.getTitle(),user2.getEmail());
         System.out.println("title2 : "  + result2.getTitle());
         System.out.println("user2 : "  + result2.getUser().getEmail());
 
