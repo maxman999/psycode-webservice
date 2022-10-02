@@ -82,4 +82,9 @@ public class IndexController {
         return "view/scraps/scraps-update";
     }
 
+    @GetMapping("tsTest")
+    public String tsTest(){
+        return "view/types/ts-test";
+    }
+
 }
