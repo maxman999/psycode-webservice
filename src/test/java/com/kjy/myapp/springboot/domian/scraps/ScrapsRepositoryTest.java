@@ -78,9 +78,9 @@ public class ScrapsRepositoryTest {
         System.out.println(requestDto.toEntity().getDescription());
 
         //when
-        List<Scraps> postList = scrapsRepository.findAll();
+        List<Scraps> scrapList = scrapsRepository.findAll();
         //then
-        Scraps scraps = postList.get(0);
+        Scraps scraps = scrapList.get(0);
         assertThat(scraps.getTitle()).isEqualTo(title);
         assertThat(scraps.getDescription()).isEqualTo(description);
         assertThat(scraps.getUser().getEmail()).isEqualTo(user.getEmail());
@@ -149,10 +149,10 @@ public class ScrapsRepositoryTest {
                 .user(user)
                 .build());
         //when
-        List<Scraps> postList = scrapsRepository.findAll();
+        List<Scraps> scrapList = scrapsRepository.findAll();
 
         //then
-        Scraps scraps = postList.get(0);
+        Scraps scraps = scrapList.get(0);
         System.out.println(">>>>>> createData = " + scraps.getCreateDate() + ", modifiedData = " + scraps.getModifiedDate());
 
         assertThat(scraps.getCreateDate().isAfter(now));
@@ -200,8 +200,8 @@ public class ScrapsRepositoryTest {
         Sort sort1 = Sort.by("id").descending();
         Pageable pageable = PageRequest.of(0, 10, sort1);
         Page<Scraps> result = scrapsRepository.findAll(pageable);
-        result.get().forEach(post -> {
-            System.out.println(post);
+        result.get().forEach(scrap -> {
+            System.out.println(scrap);
         });
     }
 
@@ -215,8 +215,8 @@ public class ScrapsRepositoryTest {
         builder.and(expression);
         Page<Scraps> result = scrapsRepository.findAll(builder, pageable);
 
-        result.stream().forEach(post -> {
-            System.out.println(post);
+        result.stream().forEach(scrap -> {
+            System.out.println(scrap);
         });
     }
 
@@ -232,8 +232,8 @@ public class ScrapsRepositoryTest {
         builder.and(exAll);
         builder.and(qScraps.id.gt(0L));
         Page<Scraps> result = scrapsRepository.findAll(builder, pageable);
-        result.stream().forEach(post -> {
-            System.out.println(post);
+        result.stream().forEach(scrap -> {
+            System.out.println(scrap);
         });
     }
 

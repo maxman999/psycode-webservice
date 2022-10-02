@@ -53,7 +53,7 @@ public class IndexController {
     }
 
     @GetMapping("scraps/read")
-    public String postRead(Model model, PageRequestDto pageRequestDTO, @LoginUser SessionUser user) {
+    public String scrapRead(Model model, PageRequestDto pageRequestDTO, @LoginUser SessionUser user) {
         model.addAttribute("result", scrapsService.getListWithPaging(pageRequestDTO, user.getEmail()));
         model.addAttribute("request", pageRequestDTO);
         return "view/scraps/scraps-read";
@@ -77,7 +77,7 @@ public class IndexController {
     @GetMapping("scraps/update/{id}")
     public String postUpdate(@PathVariable Long id, @RequestParam int page, Model model) {
         ScrapsResponseDto dto = scrapsService.findById(id);
-        model.addAttribute("post", dto);
+        model.addAttribute("scrap", dto);
         model.addAttribute("page", page);
         return "view/scraps/scraps-update";
     }

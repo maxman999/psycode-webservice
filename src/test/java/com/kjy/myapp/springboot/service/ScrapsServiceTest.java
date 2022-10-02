@@ -65,9 +65,9 @@ public class ScrapsServiceTest {
                 .build();
         scrapsService.save(requestDto);
         //when
-        List<ScrapsListResponseDto> postList = scrapsService.findAllDesc();
+        List<ScrapsListResponseDto> scrapList = scrapsService.findAllDesc();
         //then
-        ScrapsListResponseDto scrapsListResponseDto = postList.get(0);
+        ScrapsListResponseDto scrapsListResponseDto = scrapList.get(0);
         assertThat(scrapsListResponseDto.getTitle()).isEqualTo("title");
     }
 

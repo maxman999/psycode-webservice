@@ -8,7 +8,7 @@ var main = {
             let ele = $(event.target);
             if(ele.is("div")){
                 let url = $(this).find(".originallink").text();
-                location.href=url;
+                window.open(url);
             }else if(ele.is("button") || ele.is("i")){
                 let isDuple = _this.check($(this));
                 if(isDuple === false){

@@ -8,13 +8,12 @@ var main = {
         $('#btn-update').on('click', function(){
             _this.update();
         });
-
         $(".list-wrapper-div").click(handler);
         function handler(event){
             let ele = $(event.target);
             if(ele.is("div")){
                 let url = $(this).find(".originallink").text();
-                location.href=url;
+                window.open(url);
             }else if(ele.is("button") || ele.is("i")){
                 var result = confirm("기사를 삭제하시겠습니까?");
                     if(result){

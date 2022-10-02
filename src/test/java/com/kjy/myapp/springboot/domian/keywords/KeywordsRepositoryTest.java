@@ -2,6 +2,7 @@ package com.kjy.myapp.springboot.domian.keywords;
 
 import com.kjy.myapp.springboot.domain.keywords.Keywords;
 import com.kjy.myapp.springboot.domain.keywords.KeywordsRepository;
+import com.kjy.myapp.springboot.domain.scraps.ScrapsRepository;
 import com.kjy.myapp.springboot.domain.user.Role;
 import com.kjy.myapp.springboot.domain.user.User;
 import com.kjy.myapp.springboot.domain.user.UserRepository;
@@ -21,6 +22,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class KeywordsRepositoryTest {
+
+    @Autowired
+    private ScrapsRepository scrapsRepository;
 
     @Autowired
     private KeywordsRepository keywordsRepository;
