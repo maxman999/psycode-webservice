@@ -56,27 +56,27 @@ public class KeywordsServiceTest {
         User user = userRepository.findByEmail("testEmail").get();
 
         KeywordsSaveRequestDto keywordsSaveRequestDto = KeywordsSaveRequestDto.builder()
-                .keyword1_user(key1)
-                .keyword2_user(key2)
-                .keyword3_user(key3)
-                .useremail(user.getEmail())
+                .keyword1(key1)
+                .keyword2(key2)
+                .keyword3(key3)
+                .userEmail(user.getEmail())
                 .build();
 
         Long before_id = keywordsServices.save(keywordsSaveRequestDto);
-        String before_key = keywordsRepository.findByUser_email("testEmail").get().getKeyword1_user();
+        String before_key = keywordsRepository.findByUser_email("testEmail").get().getKeyword1();
 
         System.out.println("before id : " + before_id);
         System.out.println("before key : " + before_key);
 
         KeywordsSaveRequestDto keywordsSaveRequestDto2 = KeywordsSaveRequestDto.builder()
-                .keyword1_user(cKey1)
-                .keyword2_user(key2)
-                .keyword3_user(key3)
-                .useremail(user.getEmail())
+                .keyword1(cKey1)
+                .keyword2(key2)
+                .keyword3(key3)
+                .userEmail(user.getEmail())
                 .build();
 
         Long after_id = keywordsServices.save(keywordsSaveRequestDto2);
-        String after_key = keywordsRepository.findByUser_email("testEmail").get().getKeyword1_user();
+        String after_key = keywordsRepository.findByUser_email("testEmail").get().getKeyword1();
         System.out.println("after id : " + after_id);
         System.out.println("after key : " + after_key);
 

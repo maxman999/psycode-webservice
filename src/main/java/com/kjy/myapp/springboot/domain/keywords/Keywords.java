@@ -18,27 +18,27 @@ public class Keywords extends BaseTimeEntity {
     private Long id;
 
     @Column(length = 30)
-    private String keyword1_user;
+    private String keyword1;
     @Column(length = 30)
-    private String keyword2_user;
+    private String keyword2;
     @Column(length = 30)
-    private String keyword3_user;
+    private String keyword3;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Builder
-    public Keywords(String keyword1_user, String keyword2_user, String keyword3_user, User user){
-        this.keyword1_user = keyword1_user;
-        this.keyword2_user = keyword2_user;
-        this.keyword3_user = keyword3_user;
+    public Keywords(String keyword1, String keyword2, String keyword3, User user){
+        this.keyword1 = keyword1;
+        this.keyword2 = keyword2;
+        this.keyword3 = keyword3;
         this.user = user;
     }
 
     public void update(String keyword1_user, String keyword2_user, String keyword3_user){
-        this.keyword1_user = keyword1_user;
-        this.keyword2_user = keyword2_user;
-        this.keyword3_user = keyword3_user;
+        this.keyword1 = keyword1_user;
+        this.keyword2 = keyword2_user;
+        this.keyword3 = keyword3_user;
     }
 
 }

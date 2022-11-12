@@ -12,25 +12,25 @@ import lombok.ToString;
 @NoArgsConstructor
 public class KeywordsSaveRequestDto {
 
-    private String keyword1_user;
-    private String keyword2_user;
-    private String keyword3_user;
-    private String useremail;
+    private String keyword1;
+    private String keyword2;
+    private String keyword3;
+    private String userEmail;
 
     @Builder
-    public KeywordsSaveRequestDto(String keyword1_user, String keyword2_user, String keyword3_user, String useremail ){
-        this.keyword1_user = keyword1_user;
-        this.keyword2_user = keyword2_user;
-        this.keyword3_user = keyword3_user;
-        this.useremail = useremail;
+    public KeywordsSaveRequestDto(String keyword1, String keyword2, String keyword3, String userEmail ){
+        this.keyword1 = keyword1;
+        this.keyword2 = keyword2;
+        this.keyword3 = keyword3;
+        this.userEmail = userEmail;
     }
 
     public Keywords toEntity(){
-        User user = User.builder().email(useremail).build();
+        User user = User.builder().email(userEmail).build();
         return Keywords.builder()
-                .keyword1_user(keyword1_user)
-                .keyword2_user(keyword2_user)
-                .keyword3_user(keyword3_user)
+                .keyword1(keyword1)
+                .keyword2(keyword2)
+                .keyword3(keyword3)
                 .user(user)
                 .build();
     }

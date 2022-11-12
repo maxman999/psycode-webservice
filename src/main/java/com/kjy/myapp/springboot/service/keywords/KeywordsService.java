@@ -19,12 +19,12 @@ public class KeywordsService {
 
     @Transactional
     public Long save(KeywordsSaveRequestDto requestDto) {
-        Optional<Keywords> opt = keywordsRepository.findByUser_email(requestDto.getUseremail());
+        Optional<Keywords> opt = keywordsRepository.findByUser_email(requestDto.getUserEmail());
         if(!opt.isPresent()){
             return keywordsRepository.save(requestDto.toEntity()).getId();
         }else {
             Keywords keywords = opt.get();
-            keywords.update(requestDto.getKeyword1_user(), requestDto.getKeyword2_user(), requestDto.getKeyword3_user());
+            keywords.update(requestDto.getKeyword1(), requestDto.getKeyword2(), requestDto.getKeyword3());
             return keywords.getId();
         }
     }
@@ -35,9 +35,9 @@ public class KeywordsService {
         Optional opt = keywordsRepository.findByUser_email(user_email);
         if(opt.isPresent()){
             keywords = (Keywords) opt.get();
-            keyList.add(keywords.getKeyword1_user());
-            keyList.add(keywords.getKeyword2_user());
-            keyList.add(keywords.getKeyword3_user());
+            keyList.add(keywords.getKeyword1());
+            keyList.add(keywords.getKeyword2());
+            keyList.add(keywords.getKeyword3());
         }
         return keyList;
     }
